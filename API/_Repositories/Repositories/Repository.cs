@@ -28,7 +28,7 @@ namespace API._Repositories.Repositories
             _context.AddRange(entities);
         }
 
-        public IQueryable<T> FinAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
+        public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
             if(includeProperties != null)

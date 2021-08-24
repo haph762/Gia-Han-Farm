@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using API._Repositories.Interfaces;
+using API._Repositories.Repositories;
+using API._Servieces.Interfaces;
+using API._Servieces.Services;
 using API.Data;
 using API.Helpers.AutoMapper;
 using AutoMapper;
@@ -68,9 +72,10 @@ namespace API
             services.AddSingleton(AutoMapperConfig.RegisterMappings());
 
             //add Repository
+            services.AddScoped<IUserRepository, UserRepository>();
 
             //add Service
-
+            services.AddScoped<IAuthService, AuthService>();
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {

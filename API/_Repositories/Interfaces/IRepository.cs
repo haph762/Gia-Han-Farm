@@ -11,7 +11,7 @@ namespace API._Repositories.Interfaces
          Task<T> FindById( object id);
          Task<T> FindSingle(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
          IQueryable<T> FindAll (params Expression<Func<T, object>>[] includeProperties);
-         IQueryable<T> FinAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
+         IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties);
          void Add (T entity);
          void AddMutiple(List<T> entities);
          void Update(T entity);
