@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -23,6 +23,9 @@ import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './views/login/login.component';
 import { RegisterComponent } from './views/register/register.component';
 
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
 const APP_CONTAINERS = [
   DefaultLayoutComponent
 ];
@@ -42,6 +45,13 @@ import { AppRoutingModule } from './app.routing';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ChartsModule } from 'ng2-charts';
+import { AuthGuard } from './_core/_guard/auth.guard';
+import { HttpClientModule } from '@angular/common/http';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { FormsModule } from '@angular/forms';
+import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
+import { JwtModule } from '@auth0/angular-jwt';
+import { commonPerProject } from './_core/_untility/common-per-project';
 
 @NgModule({
   imports: [
@@ -59,6 +69,17 @@ import { ChartsModule } from 'ng2-charts';
     ChartsModule,
     IconModule,
     IconSetModule.forRoot(),
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: [commonPerProject.serverSentTokenInAppModule],
+        disallowedRoutes: [commonPerProject.linkSentTokenInAppModule]
+      }
+    }),
+    HttpClientModule,
+    NgxSpinnerModule,
+    FormsModule,
+    SnotifyModule,
   ],
   declarations: [
     AppComponent,
@@ -73,8 +94,12 @@ import { ChartsModule } from 'ng2-charts';
       provide: LocationStrategy,
       useClass: HashLocationStrategy
     },
+    AuthGuard,
     IconSetService,
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    SnotifyService,
   ],
-  bootstrap: [ AppComponent ]
+  bootstrap: [ AppComponent ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

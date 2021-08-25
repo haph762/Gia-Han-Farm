@@ -47,7 +47,10 @@ namespace API
             //add Cors
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
             {
-                builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                builder
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowAnyOrigin();
             }));
 
             //add DbContext
@@ -57,7 +60,7 @@ namespace API
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(o =>
             {
                 o.RequireHttpsMetadata = false;
-                o.SaveToken =true;
+                o.SaveToken = true;
                 o.TokenValidationParameters = new TokenValidationParameters
                 {
                     ValidateIssuerSigningKey = true,
@@ -79,7 +82,7 @@ namespace API
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vaccination_API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -98,10 +101,13 @@ namespace API
                                 Id = "Bearer"
                             }
                         },
-                        new string[] {}
-                    },
+                        new string[] { }
+                    }
                 });
             });
+
+            // AddSignalR
+            services.AddSignalR();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -111,16 +117,16 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vaccination_API v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseCors("CorsPolicy");
 
-            app.UseAuthentication();
+            app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

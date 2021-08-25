@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace API.Helpers.Utilities
 {
     public class OperationResult
@@ -6,9 +8,11 @@ namespace API.Helpers.Utilities
         public string Message { get; set; }
         public bool Success { get; set; }
         public object Data { get; set; }
+        public List<string> ValidateData { get; set; }
         
         public OperationResult()
         {
+            this.Data = null;
         }
         
         public OperationResult( string message)
@@ -40,6 +44,13 @@ namespace API.Helpers.Utilities
             this.Message = message;
             this.Caption = caption;
             this.Data = data;
+        }
+        public OperationResult(bool success, string message, string caption, List<string> validateData)
+        {
+            this.Success = success;
+            this.Message = message;
+            this.Caption = caption;
+            this.ValidateData = validateData;
         }
         
     }

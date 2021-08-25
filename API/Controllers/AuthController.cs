@@ -4,6 +4,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using API._Servieces.Interfaces;
+using API.Helpers.Params;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -24,9 +25,9 @@ namespace API.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login (string account, string password)
+        public async Task<IActionResult> Login (UserForLoginParam userForLogin)
         {
-            var userformservice = await _authservice.Login(account, password);
+            var userformservice = await _authservice.Login(userForLogin.Account, userForLogin.Password);
             if(userformservice == null)
                 return Unauthorized();
                 var claims = new []
