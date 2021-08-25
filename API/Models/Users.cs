@@ -57,5 +57,10 @@ namespace API.Models
         /// </summary>
         [Column(TypeName = "datetime")]
         public DateTime? Update_Time { get; set; }
+        /// <summary>
+        /// Image User
+        /// </summary>
+        [StringLength(255)]
+        public string Image { get; set; }
     }
 }

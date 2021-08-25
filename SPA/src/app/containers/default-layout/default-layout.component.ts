@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Users } from '../../_core/_models/users';
 import { AlertUtilityService } from '../../_core/_services/alert-utility.service';
 import { AuthService } from '../../_core/_services/auth.service';
+import { commonPerProject } from '../../_core/_untility/common-per-project';
 import { NavItem } from '../../_nav';
 
 @Component({
@@ -13,6 +14,7 @@ export class DefaultLayoutComponent {
 
   public sidebarMinimized = false;
   public navItems = [];
+  public imageUser = '';
   currentUser: Users = JSON.parse(localStorage.getItem('user'));
 
   constructor(
@@ -22,6 +24,8 @@ export class DefaultLayoutComponent {
     private alert: AlertUtilityService,
   ){
     this.navItems = this.nav.getNav();
+    this.imageUser = this.currentUser.image == null ? commonPerProject.imageUserDefault
+                                    : commonPerProject.imageUserUrl + this.currentUser.image;
   }
 
   toggleMinimize(e) {

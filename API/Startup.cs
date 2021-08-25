@@ -39,10 +39,8 @@ namespace API
         {
 
             //add Controller
-            services.AddControllers().AddNewtonsoftJson( o =>
-            {
-                o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-            });
+            services.AddControllers().AddNewtonsoftJson(o =>
+                o.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
 
             //add Cors
             services.AddCors(o => o.AddPolicy("CorsPolicy", builder =>
@@ -76,9 +74,13 @@ namespace API
 
             //add Repository
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IRolesRepository, RolesRepository>();
+            services.AddScoped<IRoleUserRepository, RoleUserRepository>();
 
             //add Service
             services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<IUsersService, UsersService>();
+            services.AddScoped<IFileService, FileService>();
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {
@@ -129,6 +131,8 @@ namespace API
             app.UseAuthentication();
 
             app.UseAuthorization();
+            
+            app.UseStaticFiles();
 
             app.UseEndpoints(endpoints =>
             {

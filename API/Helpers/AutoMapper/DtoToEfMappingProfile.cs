@@ -9,6 +9,7 @@ namespace API.Helpers.AutoMapper
         public DtoToEfMappingProfile()
         {
             CreateMap<Users_Dto, Users>();
+            CreateMap<Users_Not_Password_Dto, Users>();
         }
     }
 }

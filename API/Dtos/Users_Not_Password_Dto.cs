@@ -1,12 +1,10 @@
 using System;
-using Microsoft.AspNetCore.Http;
 
 namespace API.Dtos
 {
-    public class Users_Dto
+    public class Users_Not_Password_Dto
     {
         public string User_Account { get; set; }
-        public string Password { get; set; }
         public string User_Name { get; set; }
         public string Email { get; set; }
         public string Phone_Number { get; set; }
@@ -16,6 +14,5 @@ namespace API.Dtos
         public string Update_By { get; set; }
         public DateTime? Update_Time { get; set; }
         public string Image { get; set; }
-        public IFormFile File { get; set; }
     }
 }
