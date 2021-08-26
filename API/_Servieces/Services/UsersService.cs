@@ -200,6 +200,7 @@ namespace API._Servieces.Services
             }
             userExists.User_Name = model.User_Name;
             userExists.Email = model.Email;
+            userExists.Image = model.Image;
             userExists.Phone_Number = model.Phone_Number;
             userExists.Update_Time = DateTime.Now;
             userExists.Update_By = model.Update_By;

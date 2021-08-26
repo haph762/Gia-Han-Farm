@@ -5,6 +5,6 @@ namespace API._Servieces.Interfaces
 {
     public interface IAuthService
     {
-         Task<Users_Dto> Login(string account, string password);
+         Task<User_Logged_Dto> Login(string account, string password);
     }
 }

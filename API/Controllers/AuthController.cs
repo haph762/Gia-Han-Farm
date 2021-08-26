@@ -33,7 +33,7 @@ namespace API.Controllers
                 var claims = new []
                 {
                     new Claim(ClaimTypes.NameIdentifier, userformservice.User_Account),
-                    new Claim(ClaimTypes.Name, userformservice.User_Name)
+                    new Claim(ClaimTypes.Name, userformservice.User_Account)
                 };
             var key = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(_configuration.GetSection("AppSettings:Token").Value));
 

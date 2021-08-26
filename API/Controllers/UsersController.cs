@@ -9,7 +9,7 @@ using API.Dtos;
 using API.Helpers.Params;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -63,9 +63,9 @@ namespace API.Controllers
         {
             if(model.File !=null)
             {
-                var image = _userRepository.FindAll(x =>x.User_Account == model.User_Account)
+                var image = await _userRepository.FindAll(x =>x.User_Account == model.User_Account)
                     .Select(x =>x.Image)
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();
                 if(!string.IsNullOrEmpty(image))
                 {
                     _fileService.DeleteFileUpload(image, @"\uploaded\images\user");
