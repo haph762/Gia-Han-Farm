@@ -7,5 +7,8 @@ export interface Users {
     valid_From: Date;
     valid_To: Date;
     last_Login: Date;
+    update_By: string;
+    update_Time: Date;
     image: string;
+    roles: string[];
 }

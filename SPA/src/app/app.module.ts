@@ -52,6 +52,9 @@ import { FormsModule } from '@angular/forms';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { JwtModule } from '@auth0/angular-jwt';
 import { commonPerProject } from './_core/_untility/common-per-project';
+import { UserComponent } from './views/user/user.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 @NgModule({
   imports: [
@@ -68,6 +71,8 @@ import { commonPerProject } from './_core/_untility/common-per-project';
     TabsModule.forRoot(),
     ChartsModule,
     IconModule,
+    PaginationModule.forRoot(),
+    ModalModule.forRoot(),
     IconSetModule.forRoot(),
     JwtModule.forRoot({
       config: {
@@ -87,7 +92,8 @@ import { commonPerProject } from './_core/_untility/common-per-project';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    UserComponent
   ],
   providers: [
     {

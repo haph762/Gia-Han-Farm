@@ -14,7 +14,7 @@ export class NavItem {
   getNav() {
     //get user
     const user: any = JSON.parse(localStorage.getItem('user'));
-    const roles: string[] = user.role;
+    const roles: string[] = user.roles;
     this.navItems = [];
 
     //navs
@@ -26,18 +26,18 @@ export class NavItem {
     //users
     const navItemUser = {
       name: '1. Settings',
-      url: 'users',
+      url: 'settings',
       icon: 'icon-user',
       children: []
     };
-    // if (roles.includes(Roles.sets_UserList)) {
-    //   const navItem = {
-    //     name: '1.1 User List',
-    //     url: '/settings/user-list',
-    //     class: 'menu-margin'
-    //   };
-    //   navItemUser.children.push(navItem);
-    // }
+    if (roles.includes(Roles.sets_UserList)) {
+      const navItem = {
+        name: '1.1 User List',
+        url: '/settings/user-list',
+        class: 'menu-margin'
+      };
+      navItemUser.children.push(navItem);
+    }
 
     //push navs
     this.navItems.push(navItemDashboard);
