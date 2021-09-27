@@ -1,0 +1,6 @@
+.vscode
+.history
+.vs
+API/obj
+API/bin
+API/debug.log
