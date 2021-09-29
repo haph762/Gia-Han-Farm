@@ -93,7 +93,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     P500Component,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    UserComponent,
   ],
   providers: [
     {

@@ -4,6 +4,8 @@ const apiUrl = 'http://' + ip + ':8081';
 export const commonPerProject = {
     //local
     apiUrl: 'http://localhost:5000/api/',
+    imageUrl: 'http://localhost:5000/uploaded/images/',
+    imageNews: 'http://localhost:5000/uploaded/images/news/',
     imageProductUrl: 'http://localhost:5000/uploaded/images/product/',
     videoProductUrl: 'http://localhost:5000/uploaded/video/product/',
     imageArticleUrl: 'http://localhost:5000/uploaded/images/article/',

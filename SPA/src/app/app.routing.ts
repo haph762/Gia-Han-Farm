@@ -65,6 +65,15 @@ export const routes: Routes = [
           },
         ]
       },
+      {
+        path:'news',
+        children:[
+          {
+            path:'news',
+            loadChildren: () => import('./views/news/news.module').then(m =>m.NewsModule)
+          },
+        ]
+      },
     ]
   },
   { path: '**', component: P404Component }

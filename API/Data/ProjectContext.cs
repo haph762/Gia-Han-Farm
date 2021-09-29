@@ -9,6 +9,7 @@ namespace API.Data
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RoleUser> RoleUser { get; set; }
+        public virtual DbSet<News> News {get; set;}
         
         public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
         {
@@ -26,6 +27,12 @@ namespace API.Data
             modelBuilder.Entity<RoleUser>(entity =>
             {
                 entity.HasKey(e => new { e.user_account, e.role_unique });
+            });
+            modelBuilder.Entity<News>(entity =>
+            {
+                entity.HasKey(e => new{ e.News_ID});
+                
+                entity.Property(e => e.News_ID).ValueGeneratedOnAdd();
             });
             
             OnModelCreatingPartial(modelBuilder);

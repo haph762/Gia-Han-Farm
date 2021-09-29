@@ -1,0 +1,53 @@
+<div class="card">
+    <div class="card-header">
+        <form #searchForm="ngForm" >
+          <div class="form-row">
+            <div class="col-3">
+              <h5>News List</h5>
+            </div>
+            <div class="col-3">
+              <input type="text" class="form-control" name="search" (keyup)="search()" placeholder="Search..."  [(ngModel)]="text">
+            </div>
+            <div class="col-3">
+              <button type="submit" class="btn btn-success mr-1" (click)="search()">
+                <i class="fa fa-search"></i> Search
+              </button>
+              <button type="button" class="btn btn-secondary" (click)="clear()">
+                <i class="fa fa-remove"></i> Clear
+              </button>
+            </div>
+            <div class="col text-right">
+              <button type="button" class="btn btn-sm btn-primary float-right" (click)="addNews()">
+                <i class="fa fa-plus"></i> Add New
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    <div class="card-body">
+      <div class="row">
+            <div class="col-md-4" *ngFor="let item of news; let i =index">
+                <div class="card">
+                    <img [src]="(item.image == '' || item.images == null) ? defaultImage : urlImage + item.images[0]" height="300px" style="object-fit: cover;" class="card-img-top" alt="...">
+                
+                    <div class="card-body">
+                    <h5 class="card-title">{{item.title}}</h5>
+                    <p class="card-text">{{item.short_Description}}</p>
+                    <a [routerLink]="['/news/news/edit/'+ item.news_ID]" class="btn btn-primary">Edit</a>
+                    <button type="button" class="btn btn-danger" (click)="remove(item)">Delete</button>
+                    </div>
+                </div>
+            </div>
+      </div>
+      <div class="row" *ngIf="news.length === 0">
+          <div class="col text-center" style="background-color: goldenrod; height: 50px;"><h4 style="padding: 10px;">NO DATA</h4></div>
+      </div>
+    </div>
+</div>
+<!-- Pagination -->
+<div class="d-flex" *ngIf="pagination.totalPage > 1">
+  <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [(ngModel)]="pagination.currentPage"
+    [itemsPerPage]="pagination.pageSize" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+    nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5"></pagination>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

@@ -7,6 +7,7 @@ import { UserResolver } from '../../_core/_resolver/user.resolver';
 import { UserGuard } from '../../_core/_guard/user.guard';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 
 @NgModule({
@@ -18,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     PaginationModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
+    NgxSpinnerModule,
   ],
   providers:[
     UserResolver,

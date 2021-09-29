@@ -10,6 +10,7 @@ namespace API.Helpers.AutoMapper
         {
             CreateMap<Users, Users_Dto>();
             CreateMap<Users, Users_Not_Password_Dto>();
+            CreateMap<News, News_Dto>();
         }
     }
 }

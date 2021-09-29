@@ -76,11 +76,13 @@ namespace API
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IRolesRepository, RolesRepository>();
             services.AddScoped<IRoleUserRepository, RoleUserRepository>();
+            services.AddScoped<INewsRepository, NewsRepository>();
 
             //add Service
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IFileService, FileService>();
+            services.AddScoped<INewsService, NewsService>();
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {
