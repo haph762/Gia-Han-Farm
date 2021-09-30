@@ -38,4 +38,8 @@ export class NewsService {
     let params = new HttpParams().set('news_ID', news.news_ID.toString());
     return this.http.delete<OperationResult>(this.baseUrl +'News/delete', {params});
   }
+  getnewsbyid(news_id: number){
+      let params = new HttpParams().set('news_id', news_id.toString());
+      return this.http.get<News>(this.baseUrl + 'News/getnewsbyid', {params});
+  }
 }

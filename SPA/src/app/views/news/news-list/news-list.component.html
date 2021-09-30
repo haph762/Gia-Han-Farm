@@ -31,8 +31,8 @@
                     <img [src]="(item.image == '' || item.images == null) ? defaultImage : urlImage + item.images[0]" height="300px" style="object-fit: cover;" class="card-img-top" alt="...">
                 
                     <div class="card-body">
-                    <h5 class="card-title">{{item.title}}</h5>
-                    <p class="card-text">{{item.short_Description}}</p>
+                    <h5 class="card-title text-title">{{item.title}}</h5>
+                    <p class="card-text text-description">{{item.short_Description}}</p>
                     <a [routerLink]="['/news/news/edit/'+ item.news_ID]" class="btn btn-primary">Edit</a>
                     <button type="button" class="btn btn-danger" (click)="remove(item)">Delete</button>
                     </div>

@@ -36,8 +36,6 @@ export class NewsListComponent implements OnInit {
       .pipe(untilDestroyed(this))
       .subscribe(data =>{
         this.news = data.NewsData.result;
-        console.log(this.news);
-        
         this.pagination = data.NewsData.pagination;
         this.spinnerService.hide();
       }, error =>{

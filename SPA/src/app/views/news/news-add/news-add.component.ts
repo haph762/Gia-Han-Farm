@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { News } from '../../../_core/_models/news';
@@ -23,6 +24,7 @@ export class NewsAddComponent implements OnInit {
     private alertService: AlertUtilityService,
     private spinnerService: NgxSpinnerService,
     private newsService: NewsService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -84,6 +86,35 @@ export class NewsAddComponent implements OnInit {
       {
         this.spinnerService.hide();
         this.alertService.success('Successfuly', res.message);
+        this.router.navigateByUrl('/news/news/list');
+      }else{
+        this.spinnerService.hide();
+        this.alertService.error('Error', res.message);
+      }
+    }, error =>{
+      this.spinnerService.hide();
+      console.log(error);
+    });
+  }
+  clear(){
+    this.news.title ='';
+    this.news.short_Description='';
+    this.news.contents='';
+    this.image1 =this.urlImage;
+    this.image2 =this.urlImage;
+    this.image3 =this.urlImage;
+    this.news.file1 = null;
+    this.news.file2 = null;
+    this.news.file3 = null;
+  }
+  saveAndNextNews(){
+    this.spinnerService.show();
+    this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
+      if(res.success)
+      {
+        this.spinnerService.hide();
+        this.alertService.success('Successfuly', res.message);
+        this.clear();
       }else{
         this.spinnerService.hide();
         this.alertService.error('Error', res.message);

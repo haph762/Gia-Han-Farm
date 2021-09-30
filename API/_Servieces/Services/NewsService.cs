@@ -69,6 +69,11 @@ namespace API._Servieces.Services
             return  PageListUtility<News_Dto>.PageList(data, pageParam.PageNumber, pageParam.PageSize);
         }
 
+        public async Task<News_Dto> GetNewsByID(int news_id)
+        {
+            return await _newsRepository.FindAll(x => x.News_ID == news_id).ProjectTo<News_Dto>(_mapperConfiguration).FirstOrDefaultAsync();
+        }
+
         public async Task<OperationResult> RemoveNews(News_Dto model)
         {
             var query  = await _newsRepository.FindAll(x =>x.News_ID == model.News_ID).FirstOrDefaultAsync();

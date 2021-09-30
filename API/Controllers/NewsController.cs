@@ -48,6 +48,12 @@ namespace API.Controllers
             var result = await _newsService.GetAll(text, pageParam);
             return Ok(result);
         }
+        [HttpGet("getnewsbyid")]
+        public async Task<IActionResult> GetNewsByID ([FromQuery] int news_id)
+        {
+            var result = await _newsService.GetNewsByID(news_id);
+            return Ok(result);
+        }
 
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteNews ([FromQuery] News_Dto model)
