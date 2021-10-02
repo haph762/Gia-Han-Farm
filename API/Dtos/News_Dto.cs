@@ -13,7 +13,7 @@ namespace API.Dtos
         public string Update_By { get; set; }
         public DateTime? Update_Time { get; set; }
         public string Image { get; set; }
-        public List<string> Images { get; set;}
+        public List<string> UrlImages { get; set;}
         public List<IFormFile> File { get; set; }
     }
 }

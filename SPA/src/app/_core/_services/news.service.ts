@@ -32,7 +32,7 @@ export class NewsService {
     formData.append('file', news.file1);
     formData.append('file', news.file2);
     formData.append('file', news.file3);
-    return this.http.post<OperationResult>(this.baseUrl + 'News/create', formData);
+    return this.http.post<OperationResult>(this.baseUrl + 'News/create', formData, {});
   }
   removeNews(news: News){
     let params = new HttpParams().set('news_ID', news.news_ID.toString());
@@ -41,5 +41,17 @@ export class NewsService {
   getnewsbyid(news_id: number){
       let params = new HttpParams().set('news_id', news_id.toString());
       return this.http.get<News>(this.baseUrl + 'News/getnewsbyid', {params});
+  }
+  updateNews(news: News){
+    const formData = new FormData();
+    formData.append('news_ID', news.news_ID.toString());
+    formData.append('title', news.title);
+    formData.append('short_Description', news.short_Description);
+    formData.append('contents', news.contents);
+    formData.append('file', news.file1);
+    formData.append('file', news.file2);
+    formData.append('file', news.file3);
+    formData.append('image', news.image);
+    return this.http.put<OperationResult>(this.baseUrl + 'News/update', formData, {});
   }
 }

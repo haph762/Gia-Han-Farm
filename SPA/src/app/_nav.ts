@@ -41,7 +41,7 @@ export class NavItem {
 
     //News
     const navItemNews = {
-      name: '2. News',
+      name: '2. Posts',
       url: 'news',
       icon: 'cil-newspaper',
       children: []
@@ -49,7 +49,7 @@ export class NavItem {
     if (roles.includes(Roles.sets_NewsList)) {
       const navItem = {
         name: '2.1 News List',
-        url: '/news/news/list',
+        url: '/posts/news/list',
         class: 'menu-margin'
       };
       navItemNews.children.push(navItem);

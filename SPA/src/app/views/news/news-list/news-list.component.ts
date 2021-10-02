@@ -67,7 +67,7 @@ export class NewsListComponent implements OnInit {
     this.search();
   }
   addNews(){
-    this.router.navigateByUrl('/news/news/add');
+    this.router.navigateByUrl('/posts/news/add');
   }
   remove(news: News){
     this.alertService.confirmDelete("Are you sure you want to delete news '" + news.title.toUpperCase() + "' ?", SnotifyPosition.centerCenter, () =>{
@@ -77,8 +77,12 @@ export class NewsListComponent implements OnInit {
           .subscribe(res =>{
             this.spinnerService.hide();
             if(res.success){
-              this.search();
               this.alertService.success("Deleted", res.message);
+              if(this.pagination.currentPage ==2 && this.pagination.totalCount == 7)
+                {
+                  this.pagination.currentPage = 1;
+                }
+              this.search();
             }else{
               this.alertService.error("Error!", res.message);
             }

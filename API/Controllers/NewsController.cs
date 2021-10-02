@@ -44,7 +44,6 @@ namespace API.Controllers
         [HttpGet("getall")]
         public async Task<IActionResult> GetAll (string text, [FromQuery] PaginationParams pageParam)
         {
-            pageParam.PageSize = 6;
             var result = await _newsService.GetAll(text, pageParam);
             return Ok(result);
         }
@@ -81,7 +80,7 @@ namespace API.Controllers
                 {
                     _fileService.DeleteFileUpload(image, @"\uploaded\images\news");
                 }
-                model.Image =await _fileService.UploadFiles(model.File, model.News_ID +"_" , @"\uploaded\images\news");
+                model.Image = await _fileService.UploadFiles(model.File, model.News_ID +"_" , @"\uploaded\images\news");
             }
             model.Update_By = User.FindFirst(ClaimTypes.NameIdentifier).Value;
             model.Update_Time = DateTime.Now;

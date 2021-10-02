@@ -1,1 +1,114 @@
-<p>news-update works!</p>
+<div class="animated fadeIn">
+    <div class="card">
+        <div class="card-header">
+            <div class="row">
+                <div class="col-8">
+                    <h5>Add News</h5>
+                </div>
+                <div class="col-4 text-right">
+                    <button class="btn btn-sm btn-primary" [routerLink]="['/posts/news/list']">
+                        <i class="fa fa-chevron-left"></i> Back
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="form-group row">
+                <label class="col-sm-2 col-lg-1 col-form-label ">Title</label>
+                <div class="col-sm-4  col-lg-4">
+                    <input type="text" class="form-control" maxlength="50" [(ngModel)]="news.title" placeholder="title..." name="title">
+                </div>
+                <label class="col-sm-2 col-lg-1 col-form-label ">Short Description</label>
+                <div class="col-sm-4  col-lg-4">
+                    <textarea class="form-control" id="descpription" maxlength="250" [(ngModel)]="news.short_Description" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                  <label class="col-sm-2 col-lg-1 col-form-label ">Content</label>
+                <div class="col-sm-9  col-lg-9">
+                      <textarea class="form-control" id="content" maxlength="4000" [(ngModel)]="news.contents" rows="10"></textarea>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="oldImages">
+                <label class="col-sm-2 col-lg-1 col-form-label ">Images</label>
+                <div class="col-md-2">
+                    <img [src]="oldimage1" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
+                </div> 
+                <div class="col-md-2" *ngIf="existImage2">
+                    <img [src]="oldimage2" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
+                </div>
+                <div class="col-md-2" *ngIf="existImage3"> 
+                    <img [src]="oldimage3" class="card-img-top" alt="..." style="object-fit: cover; height: 200px;">
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="oldImages">
+                <label class="col-sm-2 col-lg-1 col-form-label "></label>
+                <div class="col-md-2">
+                    <button class="btn btn-primary upload m-0 w-150 float-left" (click)="uploadNewImages()">Change Images</button>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="newImages">
+                <label class="col-sm-2 col-lg-1 col-form-label ">Images</label>
+                <div class="col-md-2">
+                    <div class="card" width="100%">
+                        <img [src]="image1" class="card-img-top" alt="..." height="100%">
+                        <div class="card-body text-center p-0">
+                            <label class="btn btn-primary upload m-0 w-50 float-left">
+                                Upload
+                                <input type="file" class="uploadFile img" value="Upload Photo" 
+                                    style="width: 0px; height: 0px; overflow: hidden;" (change)="onSelectFile($event, 1)" />
+                            </label>
+                            <button class="btn btn-danger w-50 btn-delete" (click)="deleteImage(1); undoImages()">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="addImage2">
+                    <div class="card" width="100%">
+                        <img [src]="image2" class="card-img-top" alt="..." height="100%">
+                        <div class="card-body text-center p-0">
+                            <label class="btn btn-primary upload m-0 w-50 float-left">
+                                Upload
+                                <input type="file" class="uploadFile img" value="Upload Photo" 
+                                style="width: 0px; height: 0px; overflow: hidden;" (change)="onSelectFile($event, 2)"/>
+                            </label>
+                            <button class="btn btn-danger w-50 btn-delete"(click)="deleteImage(2)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2" *ngIf="addImage3">
+                    <div class="card" width="100%">
+                        <img [src]="image3" class="card-img-top" alt="..." height="100%">
+                        <div class="card-body text-center p-0">
+                            <label class="btn btn-primary upload m-0 w-50 float-left">
+                                Upload
+                                <input type="file" class="uploadFile img" value="Upload Photo" 
+                                style="width: 0px; height: 0px; overflow: hidden;" (change)="onSelectFile($event, 3)"/>
+                            </label>
+                            <button class="btn btn-danger w-50 btn-delete" (click)="deleteImage(3)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-2 col-lg-1 col-form-label "></div>
+                <h6 style="padding-left: 12px;">** Please select files with format .jpg, .png or .jpeg. Each file is smaller than 5MB.</h6>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="form-group row">
+                <div class="col">
+                    <button type="button" class="btn btn-danger mr-1" (click)="clear()">
+                        <i class="fa fa-ban"></i> Clear
+                    </button>
+                    <button type="button" class="btn btn-info" (click)="cancel()">
+                        <i class="fa fa-spinner"></i> Cancel
+                    </button>
+                    <button type="button" class="btn btn-success mr-1" (click)="saveNews()">
+                        <i class="fa fa-check"></i> Save
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

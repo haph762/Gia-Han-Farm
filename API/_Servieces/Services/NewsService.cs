@@ -63,7 +63,7 @@ namespace API._Servieces.Services
             {
                 if(item.Image != null)
                 {
-                   item.Images = item.Image.Split(';').ToList();
+                   item.UrlImages = item.Image.Split(';').ToList();
                 }
             }
             return  PageListUtility<News_Dto>.PageList(data, pageParam.PageNumber, pageParam.PageSize);
@@ -71,7 +71,12 @@ namespace API._Servieces.Services
 
         public async Task<News_Dto> GetNewsByID(int news_id)
         {
-            return await _newsRepository.FindAll(x => x.News_ID == news_id).ProjectTo<News_Dto>(_mapperConfiguration).FirstOrDefaultAsync();
+            var data = await _newsRepository.FindAll(x => x.News_ID == news_id).ProjectTo<News_Dto>(_mapperConfiguration).FirstOrDefaultAsync();
+                if(data.Image != null)
+                {
+                   data.UrlImages = data.Image.Split(';').ToList();
+                }
+            return data;
         }
 
         public async Task<OperationResult> RemoveNews(News_Dto model)
@@ -103,6 +108,9 @@ namespace API._Servieces.Services
             query.Title = model.Title;
             query.Short_Description = model.Short_Description;
             query.Contents = model.Contents;
+            if(model.File != null || model.Image == null){
+                query.Image = model.Image;
+            }
             query.Update_By = model.Update_By;
             query.Update_Time = model.Update_Time;
             _newsRepository.Update(query);

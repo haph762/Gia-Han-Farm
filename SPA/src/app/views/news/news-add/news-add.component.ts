@@ -15,11 +15,14 @@ import { commonPerProject } from '../../../_core/_untility/common-per-project';
 })
 export class NewsAddComponent implements OnInit {
 
-  urlImage: string = commonPerProject.imageUrl + "no-image.jpg";
-  image2: string = this.urlImage; 
-  image3: string = this.urlImage; 
-  image1: string = this.urlImage; 
+  urlImage: string = commonPerProject.imageNews;
+  defaultImage: string = commonPerProject.imageUrl + "no-image.jpg";
+  image3: string = this.defaultImage; 
+  image2: string = this.defaultImage; 
+  image1: string = this.defaultImage; 
   news: News = {} as News;
+  addImage2: boolean = false;
+  addImage3: boolean = false;
   constructor(
     private alertService: AlertUtilityService,
     private spinnerService: NgxSpinnerService,
@@ -57,9 +60,11 @@ export class NewsAddComponent implements OnInit {
         if (number == 1) {
           this.image1 = event.target.result.toString();
           this.news.file1 = file;
+          this.addImage2 = true;
         } else if (number == 2) {
           this.image2 = event.target.result.toString();
           this.news.file2 = file;
+          this.addImage3 = true;
         } else {
           this.image3 = event.target.result.toString();
           this.news.file3 = file;
@@ -69,13 +74,25 @@ export class NewsAddComponent implements OnInit {
   }
   deleteImage(number) {
     if (number == 1) {
-      this.image1 = this.urlImage; ;
+      this.image1 = this.defaultImage;
       this.news.file1 = null;
-    } else if (number == 2) {
-      this.image2 = this.urlImage;
+
+      this.image2 = this.defaultImage;
       this.news.file2 = null;
+      this.addImage2 =false;
+
+      this.image3 = this.defaultImage;
+      this.news.file3 = null;
+      this.addImage3 = false;
+    } else if (number == 2) {
+      this.image2 = this.defaultImage;
+      this.news.file2 = null;
+
+      this.image3 = this.defaultImage;
+      this.news.file3 = null;
+      this.addImage3 = false;
     } else {
-      this.image3 = this.urlImage;
+      this.image3 = this.defaultImage;
       this.news.file3 = null;
     }
   }
@@ -86,7 +103,7 @@ export class NewsAddComponent implements OnInit {
       {
         this.spinnerService.hide();
         this.alertService.success('Successfuly', res.message);
-        this.router.navigateByUrl('/news/news/list');
+        this.router.navigateByUrl('/posts/news/list');
       }else{
         this.spinnerService.hide();
         this.alertService.error('Error', res.message);
@@ -100,12 +117,14 @@ export class NewsAddComponent implements OnInit {
     this.news.title ='';
     this.news.short_Description='';
     this.news.contents='';
-    this.image1 =this.urlImage;
-    this.image2 =this.urlImage;
-    this.image3 =this.urlImage;
+    this.image1 =this.defaultImage;
+    this.image2 =this.defaultImage;
+    this.image3 =this.defaultImage;
     this.news.file1 = null;
     this.news.file2 = null;
     this.news.file3 = null;
+    this.addImage2 = false;
+    this.addImage3 = false;
   }
   saveAndNextNews(){
     this.spinnerService.show();

@@ -1,5 +1,5 @@
 const ip =window.location.hostname;
-const apiUrl = 'http://' + ip + ':8081';
+const apiUrl = 'http://' + ip + ':2021';
 
 export const commonPerProject = {
     //local
@@ -18,6 +18,8 @@ export const commonPerProject = {
 
     //host
     // apiUrl: apiUrl + '/api/',
+    // imageUrl: apiUrl + '/uploaded/images/',
+    // imageNews: apiUrl + '/uploaded/images/news/',
     // imageProductUrl: apiUrl + '/uploaded/images/product/',
     // videoProductUrl: apiUrl + '/uploaded/video/product/',
     // imageArticleUrl: apiUrl + '/uploaded/images/article/',

@@ -6,7 +6,7 @@ export interface News{
     update_By: string;
     update_Time: Date;
     image: string;
-    images: string[];
+    urlImages: string[];
     file1: File;
     file2: File;
     file3: File;

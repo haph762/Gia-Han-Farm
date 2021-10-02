@@ -6,7 +6,7 @@
                     <h5>Add News</h5>
                 </div>
                 <div class="col-4 text-right">
-                    <button class="btn btn-sm btn-primary" [routerLink]="['/news/news/list']">
+                    <button class="btn btn-sm btn-primary" [routerLink]="['/posts/news/list']">
                         <i class="fa fa-chevron-left"></i> Back
                     </button>
                 </div>
@@ -16,7 +16,7 @@
             <div class="form-group row">
                 <label class="col-sm-2 col-lg-1 col-form-label ">Title</label>
                 <div class="col-sm-4  col-lg-4">
-                    <input type="text" class="form-control" maxlength="50" [(ngModel)]="news.title" placeholder="title..." name="title">
+                    <input type="text" class="form-control" required maxlength="50" [(ngModel)]="news.title" placeholder="title..." name="title">
                 </div>
                 <label class="col-sm-2 col-lg-1 col-form-label ">Short Description</label>
                 <div class="col-sm-4  col-lg-4">
@@ -44,7 +44,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" *ngIf="addImage2">
                     <div class="card" width="100%">
                         <img [src]="image2" class="card-img-top" alt="..." height="100%">
                         <div class="card-body text-center p-0">
@@ -57,7 +57,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" *ngIf="addImage3">
                     <div class="card" width="100%">
                         <img [src]="image3" class="card-img-top" alt="..." height="100%">
                         <div class="card-body text-center p-0">
@@ -93,3 +93,4 @@
         </div>
     </div>
 </div>
+<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
