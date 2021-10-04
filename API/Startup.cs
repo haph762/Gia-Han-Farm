@@ -86,7 +86,7 @@ namespace API
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Vaccination_API", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "GHF_API", Version = "v1" });
                 c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
                     In = ParameterLocation.Header,
@@ -121,7 +121,7 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Vaccination_API v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "GHF_API v1"));
             }
 
             app.UseCors("CorsPolicy");

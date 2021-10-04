@@ -172,6 +172,8 @@ export class NewsUpdateComponent implements OnInit {
     this.news.file1 = null;
     this.news.file2 = null;
     this.news.file3 = null;
+    this.addImage2 = false;
+    this.addImage3 = false;
     this.uploadNewImages();
   }
   cancel(){

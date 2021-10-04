@@ -10,6 +10,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NewsResolver } from '../../_core/_resolver/news.resolver';
 import { NewsGuard } from '../../_core/_guard/news.guard';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { PopoverModule } from 'ngx-bootstrap/popover';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     FormsModule,
     PaginationModule.forRoot(),
     NgxSpinnerModule,
+    PopoverModule.forRoot(),
   ],
   providers:[
     NewsResolver,
