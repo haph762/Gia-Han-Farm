@@ -101,7 +101,12 @@ export class NewsUpdateComponent implements OnInit {
       //show images
       reader.onload = (event) => {
         // called once readAsDataURL is completed
-        if (number == 1) {
+        if (number == 0) {
+          this.image1 = event.target.result.toString();
+          this.news.file1 = file;
+          this.addImage2 = true;
+          this.uploadNewImages();
+        }else if (number == 1) {
           this.image1 = event.target.result.toString();
           this.news.file1 = file;
           this.addImage2 = true;
@@ -167,11 +172,13 @@ export class NewsUpdateComponent implements OnInit {
     this.news.file1 = null;
     this.news.file2 = null;
     this.news.file3 = null;
+    this.uploadNewImages();
   }
   cancel(){
     this.loadNewsByID();
     this.oldImages = true;
     this.newImages = false;
+    this.deleteImage(1);
   }
 
 }

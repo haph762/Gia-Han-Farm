@@ -44,7 +44,11 @@
             <div class="form-group row" *ngIf="oldImages">
                 <label class="col-sm-2 col-lg-1 col-form-label "></label>
                 <div class="col-md-2">
-                    <button class="btn btn-primary upload m-0 w-150 float-left" (click)="uploadNewImages()">Change Images</button>
+                    <label class="btn btn-primary upload m-0 w-150 float-left">
+                        Change Images
+                        <input type="file" class="uploadFile img" value="Upload Photo" 
+                        style="width: 0px; height: 0px; overflow: hidden;" (change)="onSelectFile($event, 0)" />
+                    </label>
                 </div>
             </div>
             <div class="form-group row" *ngIf="newImages">

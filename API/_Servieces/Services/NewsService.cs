@@ -108,7 +108,7 @@ namespace API._Servieces.Services
             query.Title = model.Title;
             query.Short_Description = model.Short_Description;
             query.Contents = model.Contents;
-            if(model.File != null || model.Image == null){
+            if(model.File != null){
                 query.Image = model.Image;
             }
             query.Update_By = model.Update_By;
