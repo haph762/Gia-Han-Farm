@@ -98,6 +98,14 @@ export class NewsAddComponent implements OnInit {
   }
   saveNews(){
     this.spinnerService.show();
+    if(this.news.title == null || this.news.title == ''){
+      this.spinnerService.hide();
+      return this.alertService.error('Error', 'Title cannot be empty');
+    }
+    if(this.news.short_Description == null || this.news.short_Description == ''){
+      this.spinnerService.hide();
+      return this.alertService.error('Error', 'Short description cannot be empty');
+    }
     this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
       if(res.success)
       {
@@ -128,6 +136,14 @@ export class NewsAddComponent implements OnInit {
   }
   saveAndNextNews(){
     this.spinnerService.show();
+    if(this.news.title == null || this.news.title == ''){
+      this.spinnerService.hide();
+      return this.alertService.error('Error', 'Title cannot be empty');
+    }
+    if(this.news.short_Description == null || this.news.short_Description == ''){
+      this.spinnerService.hide();
+      return this.alertService.error('Error', 'Short description cannot be empty');
+    }
     this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
       if(res.success)
       {

@@ -98,6 +98,10 @@ export class UserComponent implements OnInit {
           .subscribe(res =>{
             this.spinnerService.hide();
             if(res.success){
+              if(this.pagination.currentPage == 2 && this.pagination.totalCount == 11)
+              {
+                this.pagination.currentPage =1;
+              }
               this.loadUsers();
               this.alertService.success("Deleted", res.message);
             }else{
