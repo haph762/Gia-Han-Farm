@@ -54,10 +54,35 @@ export class NavItem {
       };
       navItemNews.children.push(navItem);
     }
+    const navItem = {
+      name: '2.2 Intro List',
+      url: '/posts/intro/list',
+      class: 'menu-margin'
+    };
+    navItemNews.children.push(navItem);
+
+    //users
+    const navItemProducts = {
+      name: '3. Products and Services',
+      url: 'products',
+      icon: 'cil-child',
+      children: []
+    };
+    if (roles.includes(Roles.sets_Product_Service_CategoryList)) {
+      const navItem = {
+        name: '3.1 Products and Service Category List',
+        url: '/products/product-service-category-list',
+        class: 'menu-margin'
+      };
+      navItemProducts.children.push(navItem);
+    }
+
+
     //push navs
     this.navItems.push(navItemDashboard);
     this.navItems.push(navItemUser);
     this.navItems.push(navItemNews);
+    this.navItems.push(navItemProducts);
     return this.navItems;
   }
 }

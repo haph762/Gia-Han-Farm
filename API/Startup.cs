@@ -77,12 +77,15 @@ namespace API
             services.AddScoped<IRolesRepository, RolesRepository>();
             services.AddScoped<IRoleUserRepository, RoleUserRepository>();
             services.AddScoped<INewsRepository, NewsRepository>();
+            services.AddScoped<IProduct_Service_CategoryRepository, Product_Service_CategoryRepository>();
+            services.AddScoped<IProduct_ServiceRepository, Product_ServiceRepository>();
 
             //add Service
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersService, UsersService>();
             services.AddScoped<IFileService, FileService>();
             services.AddScoped<INewsService, NewsService>();
+            services.AddScoped<IProduct_Service_CategoryService, Product_Service_CategoryService>();
             //add SwaggerGen
             services.AddSwaggerGen(c =>
             {

@@ -10,6 +10,8 @@ namespace API.Data
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RoleUser> RoleUser { get; set; }
         public virtual DbSet<News> News {get; set;}
+        public virtual DbSet<Product_Service> Product_Service { get; set; }
+        public virtual DbSet<Product_Service_Category> Product_Service_Category { get; set; }
         
         public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
         {
@@ -33,6 +35,21 @@ namespace API.Data
                 entity.HasKey(e => new{ e.News_ID});
                 
                 entity.Property(e => e.News_ID).ValueGeneratedOnAdd();
+            });
+            modelBuilder.Entity<Product_Service>(entity =>
+            {
+                entity.Property(e => e.Price_Sale).IsFixedLength(true);
+
+                entity.Property(e => e.Product_Service_Cate_ID).IsUnicode(false);
+
+                entity.Property(e => e.Update_By).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Product_Service_Category>(entity =>
+            {
+                entity.Property(e => e.Product_Service_Cate_ID).IsUnicode(false);
+
+                entity.Property(e => e.Update_By).IsUnicode(false);
             });
             
             OnModelCreatingPartial(modelBuilder);

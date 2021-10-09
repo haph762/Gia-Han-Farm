@@ -11,6 +11,8 @@ namespace API.Helpers.AutoMapper
             CreateMap<Users_Dto, Users>();
             CreateMap<Users_Not_Password_Dto, Users>();
             CreateMap<News_Dto, News>();
+            CreateMap<Product_Service_Dto, Product_Service>();
+            CreateMap<Product_Service_Category_Dto, Product_Service_Category>();
         }
     }
 }

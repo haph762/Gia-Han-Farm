@@ -50,6 +50,8 @@ export class NewsListComponent implements OnInit {
   }
   search(){
     this.spinnerService.show();
+    console.log(this.pagination);
+    
     this.newsService.getNews(this.pagination.currentPage, this.pagination.pageSize, this.text)
       .pipe(untilDestroyed(this)).subscribe(res =>
         {
