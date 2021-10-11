@@ -70,8 +70,8 @@ export class NavItem {
     };
     if (roles.includes(Roles.sets_Product_Service_CategoryList)) {
       const navItem = {
-        name: '3.1 Products and Service Category List',
-        url: '/products/product-service-category-list',
+        name: '3.1 Products and Services Category List',
+        url: '/products/product-service-category',
         class: 'menu-margin'
       };
       navItemProducts.children.push(navItem);

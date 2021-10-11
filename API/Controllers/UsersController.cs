@@ -80,6 +80,13 @@ namespace API.Controllers
         [HttpDelete("delete")]
         public async Task<IActionResult> Remove (string user_account)
         {
+            var image = await _userRepository.FindAll(x =>x.User_Account == user_account)
+                    .Select(x =>x.Image)
+                    .FirstOrDefaultAsync();
+                if(!string.IsNullOrEmpty(image))
+                {
+                    _fileService.DeleteFileUpload(image, @"\uploaded\images\user");
+                }
             var result = await _usersService.DeleteUser(user_account);
             return Ok(result);
         }

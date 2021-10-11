@@ -74,6 +74,15 @@ export const routes: Routes = [
           },
         ]
       },
+      {
+        path:'products',
+        children:[
+          {
+            path:'product-service-category',
+            loadChildren: () => import('./views/productandservice/productandservicecategory/productandservicecategory.module').then(m =>m.ProductandservicecategoryModule)
+          },
+        ]
+      },
     ]
   },
   { path: '**', component: P404Component }
