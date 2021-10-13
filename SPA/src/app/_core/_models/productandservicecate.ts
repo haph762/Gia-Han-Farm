@@ -5,4 +5,5 @@ export interface ProductAndServiceCate{
     position: number;
     update_By: string;
     update_Time: Date;
+    checked: boolean;
 }

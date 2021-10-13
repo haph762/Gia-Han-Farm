@@ -49,7 +49,7 @@ namespace API.Controllers
             return Ok(result);
         }
         [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteProduct ([FromForm] string id)
+        public async Task<IActionResult> DeleteProduct ([FromQuery] string id)
         {
             var result = await _product_Service_CategoryService.DeleteProduct_Service_Cate(id);
             return Ok(result);
@@ -62,10 +62,10 @@ namespace API.Controllers
             var result = await _product_Service_CategoryService.UpdateProduct_Service_Cate(model);
             return Ok(result);
         }
-        [HttpGet("excellaspose")]
-        public async Task<IActionResult> GetAllProductToExcel (string text, [FromQuery] PaginationParams pagination, int checkExport)
+        [HttpGet("excelaspose")]
+        public async Task<IActionResult> GetAllProductToExcel ( string text, [FromQuery] PaginationParams pagination, int checkExport)
         {
-            var data = await _product_Service_CategoryService.GetallProduct_Service_Cate(text, pagination);
+            var data = await _product_Service_CategoryService.GetallProduct_Service_Cate(text, pagination, false);
             // get path
             var path = Path.Combine(_webHostEnvironment.ContentRootPath, "Resources\\Template\\ProductServiceCategory\\ProductServiceCategoryListTemplate.xlsx");
             //using workbookdesigner
@@ -132,7 +132,7 @@ namespace API.Controllers
         }
         
         [HttpPost("UploadExcel")]
-        public async Task<IActionResult> UploadExcel (IFormFile file)
+        public async Task<IActionResult> UploadExcel ([FromForm] IFormFile file)
         {  
             var update_By = User.FindFirst(ClaimTypes.Name).Value;
             var result = await _product_Service_CategoryService.UploadExcel(file, update_By);

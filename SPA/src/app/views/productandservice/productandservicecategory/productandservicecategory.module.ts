@@ -7,6 +7,9 @@ import { ProductandservicecateAddComponent } from './productandservicecate-add/p
 import { ProductandservicecateEditComponent } from './productandservicecate-edit/productandservicecate-edit.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { FormsModule } from '@angular/forms';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 
 @NgModule({
@@ -20,6 +23,9 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ProductandservicecategoryRoutingModule,
     NgxSpinnerModule,
     TooltipModule.forRoot(),
+    ModalModule.forRoot(),
+    FormsModule,
+    PaginationModule.forRoot(),
   ]
 })
 export class ProductandservicecategoryModule { }

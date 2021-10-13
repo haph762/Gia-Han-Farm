@@ -80,7 +80,7 @@ namespace API._Servieces.Services
             return operationResult;
         }
 
-        public async Task<PageListUtility<Product_Service_Category_Dto>> GetallProduct_Service_Cate(string text, PaginationParams pagination)
+        public async Task<PageListUtility<Product_Service_Category_Dto>> GetallProduct_Service_Cate(string text, PaginationParams pagination, bool isPaging)
         {
             var data = _product_Service_CategoryRepository.FindAll();
             var product_Service = PredicateBuilder.New<Product_Service_Category>(true);
@@ -91,7 +91,7 @@ namespace API._Servieces.Services
             }
             var result = await data.ProjectTo<Product_Service_Category_Dto>(_mapperConfiguration)
                 .OrderByDescending(x => x.Update_Time).ToListAsync();
-            return PageListUtility<Product_Service_Category_Dto>.PageList(result, pagination.PageNumber, pagination.PageSize);
+            return PageListUtility<Product_Service_Category_Dto>.PageList(result, pagination.PageNumber, pagination.PageSize, isPaging);
         }
 
         public async Task<Product_Service_Category_Dto> GetIDProduct_Service_Cate(string id)
@@ -123,18 +123,18 @@ namespace API._Servieces.Services
 
         public async Task<string> CreateCategoryID ()
         {
-            string categoryID ="ProductServiceID";
+            string categoryID ="ProductService_";
             var query = await _product_Service_CategoryRepository.FindAll()
                 .OrderByDescending(x =>x.Product_Service_Cate_ID).AsNoTracking().FirstOrDefaultAsync();
             if(query != null){
-                var temp = Int32.Parse(query.Product_Service_Cate_ID.Substring(16));
+                var temp = Int32.Parse(query.Product_Service_Cate_ID.Substring(15));
                 var tempID = (temp >=999) ? (temp +1).ToString() : 
                     (temp <999 && temp >=99) ? ("0" + (temp+1).ToString()) :
                     (temp<99 && temp>=9) ? ("00" + (temp +1).ToString()) : 
                     ("000"+(temp+1).ToString());
-                categoryID = "ProductServiceID" + tempID; 
+                categoryID = "ProductService_" + tempID; 
             }else{
-                categoryID = "ProductServiceID0001";
+                categoryID = "ProductService_0001";
             }
             
             return categoryID;
@@ -149,7 +149,7 @@ namespace API._Servieces.Services
             }
             //save file
             string fileNameExtension = (file.FileName.Split("."))[(file.FileName.Split(".")).Length - 1];
-            string fileName = "Upload_Excel_ProductServiceCate" + fileNameExtension;
+            string fileName = "Upload_Excel_ProductServiceCate." + fileNameExtension;
 
             string folder = _webHostEnvironment.WebRootPath + $@"\uploaded\excels\ProcutServiceCategory";
             if (!Directory.Exists(folder))

@@ -1,6 +1,6 @@
 <div class="animated fadeIn">
     <div class="card">
-        <div class="card-header">
+      <div class="card-header">
             <div class="row" style="align-items: center;">
                 <div class="col-md-3 col-lg-3">
                     <strong>Product and Service category</strong>
@@ -9,38 +9,38 @@
             <label class="d-block">&nbsp;</label>
             <div class="form-row">
                 <div class="col-3">
-                  <input type="text" name="search" 
+                  <input type="text" name="search" [(ngModel)]="text"
                     class="form-control" placeholder="Search...">
                 </div>
                 <label class="d-none d-lg-block">&nbsp;</label>
-                <button type="button" class="btn btn-success mr-2" ><i
+                <button type="button" class="btn btn-success mr-2" (click)="loadData()"><i
                     class="fa fa-search mr-1"></i> Search
                 </button>
-                <button type="button" class="btn btn-secondary" ><i
+                <button type="button" class="btn btn-secondary" (click)="clear()"><i
                     class="fa fa-close mr-1"></i> Clear
                 </button>
                 <div class="col text-right">
-                  <button type="button" class="btn btn-sm btn-primary" ><i
+                  <button type="button" class="btn btn-sm btn-primary" (click)="[addOrEditProductCateModal.show(), setFlag(0)]"><i
                       class="fa fa-plus"></i> Add New</button>
                 </div>
               </div>
-        </div>
+      </div>
         <div class="card-body">
             <div class="col-12" style="margin-bottom: 15px; padding: 0;">
-                <button type="button" class="btn btn-sm btn-success mr-2"  tooltip="Xuất file Excel Aspose">
+                <button type="button" class="btn btn-sm btn-success mr-2"  tooltip="Xuất file Excel Aspose" (click)="exportExcel(1)">
                   <i class="fa fa-file-excel-o"></i> ExcelAspose
                 </button>
-                <button type="button" class="btn btn-sm btn-warning mr-2"  tooltip="Xuất file PDF Aspose" style="color: white;">
+                <button type="button" class="btn btn-sm btn-warning mr-2"  tooltip="Xuất file PDF Aspose" style="color: white;" (click)="exportExcel(2)">
                   <i class="fa fa-file-pdf-o"></i> PdfAspose
                 </button>
-                <button type="button" class="btn btn-sm btn-success mr-2"  tooltip="Thêm dữ liệu từ file Excel">
+                <button type="button" class="btn btn-sm btn-success mr-2"  tooltip="Thêm dữ liệu từ file Excel" (click)="importExcel.show()">
                   <i class="fa fa-file-excel-o"></i> Import
                 </button>
                 <button type="button" class="btn btn-sm btn-primary mr-2" printSectionId="dataTable" tooltip="In dữ liệu"
                   ngxPrint printTitle="Product Category" styleSheetFile="../../../../assets/scss/_table.scss" >
                   <i class="fa fa-print"></i> Print
                 </button>
-                <button type="button" class="btn btn-sm btn-danger float-right"  tooltip="Xóa nhiều danh mục sản phẩm">
+                <button type="button" class="btn btn-sm btn-danger float-right"  tooltip="Xóa nhiều danh mục sản phẩm" (click)="deleteAll()">
                   <i class="fa fa-trash fa-lg"></i> Delete All
                 </button>
             </div>
@@ -58,10 +58,11 @@
                         <th colspan="2">Action</th>
                         <th>
                           <div class="pretty p-icon p-round p-jelly">
-                            <input class="custom-control-input" type="checkbox" value="" id="cateID" checked>
+                            <input class="custom-control-input" type="checkbox" value="" id="cateID" [checked]="checkedAll"
+                            [(ngModel)]="checkedAll" (change)="check($event)">
                             <div class="state p-danger" id="custom">
                               <i class="icon fa fa-check"></i>
-                              <label class="custom-control-label" for="checkAll"></label>
+                              <label class="custom-control-label" for="checkedAll"></label>
                             </div>
                           </div>
                         </th>
@@ -77,8 +78,8 @@
                         <td>{{item.update_Time | date: 'dd/MM/yyyy'}}</td>
                         <td>
                           <div class="pretty p-icon p-round p-pulse">
-                            <input type="checkbox" class="custom-control-input" id="cateID"
-                             checked="true">
+                            <input type="checkbox" class="custom-control-input" value="" [id]="item.product_Service_Cate_ID"
+                             [checked]="item.status" (change)="changeStatus(item)">
                             <div class="state p-success">
                               <i class="icon fa fa-check"></i>
                               <label></label>
@@ -86,22 +87,24 @@
                           </div>
                         </td>
                         <td class="w-1rem">
-                          <button type="button" class="btn btn-sm btn-primary"
-                               tooltip="Chỉnh sửa danh mục sản phẩm">
+                          <button type="button" class="btn btn-sm btn-primary" tooltip="Chỉnh sửa danh mục sản phẩm"
+                            (click)="[addOrEditProductCateModal.show(), setFlag(1), setModel(item)]">
                               <i class="fa fa-edit fa-lg"></i>
                             </button>
                         </td>
                         <td class="w-1rem">
-                          <button type="button" class="btn btn-sm btn-danger"  tooltip="Xóa danh mục sản phẩm">
+                          <button type="button" class="btn btn-sm btn-danger"  tooltip="Xóa danh mục sản phẩm"
+                          (click)="delete(item.product_Service_Cate_ID, item.product_Service_Cate_Name)">
                             <i class="fa fa-trash fa-lg"></i>
                           </button>
                         </td>
                         <td>
                           <div class="pretty p-icon p-round p-jelly">
-                            <input type="checkbox" class="custom-control-input" >
+                            <input type="checkbox" class="custom-control-input" [id]="item.product_Service_Cate_ID"
+                            [(ngModel)]="item.checked" (change)="changeChecked()">
                             <div class="state p-warning">
                               <i class="icon fa fa-check"></i>
-                              <label class="custom-control-label" ></label>
+                              <label class="custom-control-label"></label>
                             </div>
                           </div>
                         </td>
@@ -112,7 +115,94 @@
                     </tbody>
                   </table>
             </div>
+            <!-- Pagination -->
+        <div class="d-flex flex-row-reverse" *ngIf="pagination.totalPage > 1">
+          <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [(ngModel)]="pagination.currentPage"
+            [itemsPerPage]="pagination.pageSize" (pageChanged)="pageChanged($event)" previousText="&lsaquo;"
+            nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]=5></pagination>
+        </div>
         </div>
     </div>
 </div>
+
+<!-- Modals -->
+<div #addOrEditProductCateModal="bs-modal" bsModal class="modal fade" tabindex="-1">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form #addProductCateForm="ngForm">
+        <div class="modal-header">
+          <strong> Product Category</strong>
+          <button type="button" class="close pull-right" aria-label="Close"
+            (click)="addOrEditProductCateModal.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="form-group">
+            <label>Product Cate Name</label>
+            <input type="text" class="form-control" name="Product_Cate_Name" required
+            [(ngModel)]="modelCate.product_Service_Cate_Name" >
+          </div>
+          <div class="form-group">
+            <label>Position</label>
+            <input type="number" class="form-control" name="position" required 
+            [(ngModel)]="modelCate.position">
+          </div>
+          <div class="form-group">
+            <label>Status</label>
+            <input type="checkbox" style="margin-left: 10px;" name="status" 
+            [(ngModel)]="modelCate.status">
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="addOrEditProductCateModal.hide()">Cancel</button>
+          <button type="submit" class="btn btn-success" (click)="[addOrEditProductCateModal.hide(), saveCategory()]"
+            [disabled]="addProductCateForm.invalid">
+            {{ flag ===0 ?'save' :'update'}}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- modal import excel -->
+<div #importExcel="bs-modal" bsModal tabindex="-1" class="modal fade">
+  <div class="modal-dialog modal-md">
+    <div class="modal-content">
+      <form #formExcel="ngForm">
+        <div class="modal-header">
+          <strong>Import Excel Product and Service Category</strong>
+          <button class="close pull-right" aria-label="close" type="button"
+            (click)="importExcel.hide()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div> 
+        <div class="modal-body">
+          <p style="color: red;">* Please select a file '.xlsx' or '.xlsm'
+            <a href="javascript:;" (click)="downloadExample()"  tooltip="Tải file mẫu">follow this form here</a>
+          </p>
+          <div class="form-group">
+            <div class="custom-file b-form-file">
+              <label data-browse="Browse" class="custom-file-label">
+                <p *ngIf="fileImportExcel === null">Choose a file...</p>
+                <input id="input_uploadFile" style="line-height: 1 !important; outline: none;" (change)="onSelectFile($event)"
+                  accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                  type="file" [ngClass]="(fileImportExcel !== null) ? 'opacity1' : 'opacity0'">
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="[importExcel.hide(), onRemoveFile()]">Cancel</button>
+          <button type="submit" class="btn btn-success" (click)="[importExcel.hide(), uploadExcel()]"
+            [disabled]="fileImportExcel === null">
+            Import
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
