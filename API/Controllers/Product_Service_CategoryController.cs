@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -132,10 +133,16 @@ namespace API.Controllers
         }
         
         [HttpPost("UploadExcel")]
-        public async Task<IActionResult> UploadExcel ([FromForm] IFormFile file)
+        public async Task<IActionResult> UploadExcel ( IFormFile file)
         {  
             var update_By = User.FindFirst(ClaimTypes.Name).Value;
             var result = await _product_Service_CategoryService.UploadExcel(file, update_By);
+            return Ok(result);
+        }
+        [HttpPost("deletemultiple")]
+        public async Task<IActionResult> DeleteMultiple ( List<Product_Service_Category_Dto> listModel)
+        {
+            var result = await _product_Service_CategoryService.DeleteMultiple(listModel);
             return Ok(result);
         }
     }

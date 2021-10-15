@@ -36,8 +36,8 @@
                 <button type="button" class="btn btn-sm btn-success mr-2"  tooltip="Thêm dữ liệu từ file Excel" (click)="importExcel.show()">
                   <i class="fa fa-file-excel-o"></i> Import
                 </button>
-                <button type="button" class="btn btn-sm btn-primary mr-2" printSectionId="dataTable" tooltip="In dữ liệu"
-                  ngxPrint printTitle="Product Category" styleSheetFile="../../../../assets/scss/_table.scss" >
+                <button type="button" class="btn btn-sm btn-primary mr-2" tooltip="In dữ liệu"
+                  ngxPrint printSectionId="dataTable" printTitle="Product & Service Category" styleSheetFile="../../../../assets/scss/_table.scss" [useExistingCss]="true" *ngIf="productAndServiceCate.length > 0" >
                   <i class="fa fa-print"></i> Print
                 </button>
                 <button type="button" class="btn btn-sm btn-danger float-right"  tooltip="Xóa nhiều danh mục sản phẩm" (click)="deleteAll()">
@@ -203,6 +203,42 @@
       </form>
     </div>
   </div>
+</div>
+
+<div class="table-responsive" id="dataTable" hidden>
+  <table class="table table-bordered table-hover text-center">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>ProductCate ID</th>
+        <th>ProductCate Name</th>
+        <th>Position</th>
+        <th>Update By</th>
+        <th>Update Time</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of productAndServiceCate; let i = index">
+        <td>{{ (pagination.currentPage - 1) * pagination.pageSize + i + 1 }}</td>
+        <td>{{item.product_Service_Cate_ID}}</td>
+        <td>{{item.product_Service_Cate_Name}}</td>
+        <td>{{item.position}}</td>
+        <td>{{item.update_By}}</td>
+        <td>{{item.update_Time | date: 'dd/MM/yyyy'}}</td>
+        <td>
+          <div class="pretty p-icon p-round p-pulse">
+            <input type="checkbox" class="custom-control-input" value="" [id]="item.product_Service_Cate_ID"
+              [checked]="item.status" (change)="changeStatus(item)">
+            <div class="state p-success">
+              <i class="icon fa fa-check"></i>
+              <label></label>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
 <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>

@@ -10,6 +10,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { NgxPrintModule } from 'ngx-print';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     ModalModule.forRoot(),
     FormsModule,
     PaginationModule.forRoot(),
+    NgxPrintModule,
   ]
 })
 export class ProductandservicecategoryModule { }

@@ -1,4 +1,5 @@
 using System.Linq;
+using Aspose.Cells;
 using System.Threading.Tasks;
 using API._Repositories.Interfaces;
 using API._Servieces.Interfaces;
@@ -13,9 +14,9 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.AspNetCore.Http;
-using Aspose.Cells;
 using System.IO;
 using Microsoft.AspNetCore.Hosting;
+using System.Collections.Generic;
 
 namespace API._Servieces.Services
 {
@@ -148,7 +149,7 @@ namespace API._Servieces.Services
                 return new OperationResult { Message = "File not found.", Success = false };
             }
             //save file
-            string fileNameExtension = (file.FileName.Split("."))[(file.FileName.Split(".")).Length - 1];
+            string fileNameExtension = Path.GetExtension(file.FileName).ToLower();
             string fileName = "Upload_Excel_ProductServiceCate." + fileNameExtension;
 
             string folder = _webHostEnvironment.WebRootPath + $@"\uploaded\excels\ProcutServiceCategory";
@@ -161,10 +162,17 @@ namespace API._Servieces.Services
             {
                 File.Delete(filePath);
             }
-            using (FileStream fs = System.IO.File.Create(filePath))
+            try
             {
-                file.CopyTo(fs);
-                fs.Flush();
+                using (FileStream fs = System.IO.File.Create(filePath))
+                {
+                    file.CopyTo(fs);
+                    fs.Flush();
+                }
+            }
+            catch (Exception)
+            {
+                throw;
             }
             //read file
             WorkbookDesigner designer = new WorkbookDesigner();
@@ -178,9 +186,9 @@ namespace API._Servieces.Services
             for (int i = 1; i <= rows; i++)
             {
                 Product_Service_Category_Dto model = new Product_Service_Category_Dto();
-                model.Product_Service_Cate_Name = ws.Cells[i, 0].StringValue.Trim();
+                model.Product_Service_Cate_Name = ws.Cells[i, 0].Value.ToSafetyString().Trim();
                 model.Status = Convert.ToBoolean(ws.Cells[i, 1].IntValue);
-                model.Position = ws.Cells[i,2].IntValue;
+                model.Position = ws.Cells[i,2].Value.ToInt();
                 model.Update_By = update_By;
                 model.Update_Time = DateTime.Now;
                 try
@@ -190,10 +198,34 @@ namespace API._Servieces.Services
                     }
                     catch(System.Exception)
                     {
-                        operationResult = new OperationResult { Message = "Import Failed", Success = false };
+                        return new OperationResult { Message = "Import Failed", Success = false };
                     }
             }
             return await Task.FromResult(operationResult);
+        }
+
+        public async Task<OperationResult> DeleteMultiple(List<Product_Service_Category_Dto> listModel)
+        {
+            List<Product_Service_Category> category = new List<Product_Service_Category>();
+            foreach (var item in listModel)
+            {
+                if(item.Checked == true){
+                    category.Add(await _product_Service_CategoryRepository
+                        .FindAll(x =>x.Product_Service_Cate_ID == item.Product_Service_Cate_ID).FirstOrDefaultAsync());
+                }
+            }
+            if(category.Count() == 0){
+                operationResult = new OperationResult{Success=false, Message="No0 data"};
+                return operationResult;
+            }
+            _product_Service_CategoryRepository.RemoveMultiple(category);
+            try{
+                await _product_Service_CategoryRepository.Save();
+                operationResult = new OperationResult{Success = true, Message ="Delete product successfully"};
+            }catch(System.Exception){
+                operationResult = new OperationResult{Success = false, Message ="Delete product failed"};
+            }
+            return operationResult;
         }
     }
 }

@@ -62,4 +62,7 @@ export class ProductandservicecateService {
     formData.append('file', file);
     return this.http.post<OperationResult>(this.baseUrl +'Product_Service_Category/UploadExcel', formData, {});
   }
+  deleteMultiple(listModel : ProductAndServiceCate[]){
+    return this.http.post<OperationResult>(this.baseUrl +'Product_Service_Category/deletemultiple', listModel);
+  }
 }

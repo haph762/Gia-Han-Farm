@@ -136,34 +136,29 @@ export class ProductandservicecateListComponent implements OnInit {
     if(this.productAndServiceCate.length == 0){
       return this.alertService.warning('No data', 'Warning');
     }
-    if(this.productAndServiceCate.filter(c =>c.checked ===true).length === 0){
+    let countCate = this.productAndServiceCate.filter(c =>c.checked ===true).length;
+    if(countCate === 0){
       return this.alertService.warning('No category has choose', 'Warning')
     }
     this.alertService.confirmDelete('Delete '+ this.productAndServiceCate.filter(x =>x.checked ===true).length +' items?',SnotifyPosition.centerCenter, ()=>{
-      this.productAndServiceCate.forEach(x =>{
-        if(x.checked === true){
-          this.productandservicecateService.deleteCategory(x.product_Service_Cate_ID)
-          .pipe(untilDestroyed(this))
-          .subscribe(res =>{
-            if(res.success){
-              this.spinnerService.hide();
-              if(this.pagination.currentPage ===2 && this.pagination.totalCount ===11)
-                this.pagination.currentPage =1;
-              this.loadData();
-            }else{
-              this.spinnerService.hide();
-              return this.alertService.error('Fail', res.message);
-            }
-          }, error =>{
+      this.spinnerService.show();
+      this.productandservicecateService.deleteMultiple(this.productAndServiceCate)
+        .pipe(untilDestroyed(this)).subscribe(res =>{
+          if(res.success){
             this.spinnerService.hide();
-            console.log(error);
-          });
-        }
-      });
-      this.alertService.success('Succeeded', 'Delete succeeded products cate');
-      this.checkedAll = false;
-      this.loadData();
+            this.alertService.success('Succeeded', res.message);
+            this.pagination.currentPage=1;
+            this.loadData();
+          }else{
+            this.spinnerService.hide();
+            this.alertService.error('Fail', res.message);
+          }
+        }, error =>{
+          this.spinnerService.hide();
+          console.log(error);
+        });
     });
+    this.checkedAll = false;
   }
   pageChanged(event: any){
     this.pagination.currentPage = event.page;
@@ -250,6 +245,7 @@ export class ProductandservicecateListComponent implements OnInit {
         }
       }, error =>{
         this.spinnerService.hide();
+        this.alertService.error('Error', 'error');
         console.log(error);
       });
   }
