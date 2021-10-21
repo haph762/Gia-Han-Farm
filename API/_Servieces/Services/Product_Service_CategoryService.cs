@@ -162,45 +162,46 @@ namespace API._Servieces.Services
             {
                 File.Delete(filePath);
             }
-            try
-            {
+            // try
+            // {
                 using (FileStream fs = System.IO.File.Create(filePath))
                 {
                     file.CopyTo(fs);
                     fs.Flush();
                 }
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            // }
+            // catch (Exception)
+            // {
+            //     throw;
+            // }
             //read file
-            WorkbookDesigner designer = new WorkbookDesigner();
-            designer.Workbook = new Workbook(filePath);
-            Worksheet ws = designer.Workbook.Worksheets[0];
-            int rows = ws.Cells.MaxDataRow;
-            if (rows < 1)
-            {
-                return new OperationResult { Message = "Excel Empty", Success = false };
-            }
-            for (int i = 1; i <= rows; i++)
-            {
-                Product_Service_Category_Dto model = new Product_Service_Category_Dto();
-                model.Product_Service_Cate_Name = ws.Cells[i, 0].Value.ToSafetyString().Trim();
-                model.Status = Convert.ToBoolean(ws.Cells[i, 1].IntValue);
-                model.Position = ws.Cells[i,2].Value.ToInt();
-                model.Update_By = update_By;
-                model.Update_Time = DateTime.Now;
-                try
-                    {
-                        await CreateProduct_Service_Cate(model);
-                        operationResult = new OperationResult { Message = "Import succeeded", Success = true };
-                    }
-                    catch(System.Exception)
-                    {
-                        return new OperationResult { Message = "Import Failed", Success = false };
-                    }
-            }
+            // WorkbookDesigner designer = new WorkbookDesigner();
+            // designer.Workbook = new Workbook(filePath);
+            // Worksheet ws = designer.Workbook.Worksheets[0];
+            // int rows = ws.Cells.MaxDataRow;
+            // if (rows < 1)
+            // {
+            //     return new OperationResult { Message = "Excel Empty", Success = false };
+            // }
+            // for (int i = 1; i <= rows; i++)
+            // {
+            //     Product_Service_Category_Dto model = new Product_Service_Category_Dto();
+            //     model.Product_Service_Cate_Name = ws.Cells[i, 0].Value.ToSafetyString().Trim();
+            //     model.Status = Convert.ToBoolean(ws.Cells[i, 1].IntValue);
+            //     model.Position = ws.Cells[i,2].Value.ToInt();
+            //     model.Update_By = update_By;
+            //     model.Update_Time = DateTime.Now;
+            //     try
+            //         {
+            //             await CreateProduct_Service_Cate(model);
+            //             operationResult = new OperationResult { Message = "Import succeeded", Success = true };
+            //         }
+            //         catch(System.Exception)
+            //         {
+            //             return new OperationResult { Message = "Import Failed", Success = false };
+            //         }
+            // }
+                operationResult = new OperationResult{Success=false, Message="failed"};
             return await Task.FromResult(operationResult);
         }
 

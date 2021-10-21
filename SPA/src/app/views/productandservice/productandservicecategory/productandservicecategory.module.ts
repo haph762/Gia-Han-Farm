@@ -11,13 +11,15 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { FormsModule } from '@angular/forms';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { NgxPrintModule } from 'ngx-print';
+import { AnimatedComponent } from './animated/animated.component';
 
 
 @NgModule({
   declarations: [
     ProductandservicecateListComponent,
     ProductandservicecateAddComponent,
-    ProductandservicecateEditComponent
+    ProductandservicecateEditComponent,
+    AnimatedComponent
   ],
   imports: [
     CommonModule,

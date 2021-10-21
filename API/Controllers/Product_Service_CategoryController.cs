@@ -132,7 +132,7 @@ namespace API.Controllers
             return File(result,fileKind,"Product_Service_Category_" + DateTime.Now.ToString("dd_MM_yyyy") + fileExtension);
         }
         
-        [HttpPost("UploadExcel")]
+        [HttpPost("uploadexcel")]
         public async Task<IActionResult> UploadExcel ( IFormFile file)
         {  
             var update_By = User.FindFirst(ClaimTypes.Name).Value;
