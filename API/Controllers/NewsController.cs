@@ -1,7 +1,5 @@
-using System;
-using System.Linq;
+#nullable disable
 using System.Security.Claims;
-using System.Threading.Tasks;
 using API._Repositories.Interfaces;
 using API._Servieces.Interfaces;
 using API.Dtos;

@@ -1,6 +1,4 @@
-using System.Linq;
-using Aspose.Cells;
-using System.Threading.Tasks;
+#nullable disable
 using API._Repositories.Interfaces;
 using API._Servieces.Interfaces;
 using API.Dtos;
@@ -10,13 +8,7 @@ using API.Models;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using LinqKit;
-using System;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Http;
-using System.IO;
-using Microsoft.AspNetCore.Hosting;
-using System.Collections.Generic;
 
 namespace API._Servieces.Services
 {

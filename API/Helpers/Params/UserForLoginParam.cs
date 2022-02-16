@@ -1,3 +1,4 @@
+#nullable disable
 namespace API.Helpers.Params
 {
     public class UserForLoginParam

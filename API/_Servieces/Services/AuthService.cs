@@ -1,12 +1,10 @@
-using System.Linq;
-using System.Threading.Tasks;
+#nullable disable
 using API._Repositories.Interfaces;
 using API._Servieces.Interfaces;
 using API.Dtos;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
 namespace API._Servieces.Services
 {

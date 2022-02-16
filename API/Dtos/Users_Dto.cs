@@ -1,5 +1,4 @@
-using System;
-using Microsoft.AspNetCore.Http;
+#nullable disable
 
 namespace API.Dtos
 {

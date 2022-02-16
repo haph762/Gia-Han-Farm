@@ -1,3 +1,4 @@
+#nullable disable
 namespace API.Dtos
 {
     public class Role_User_Dto

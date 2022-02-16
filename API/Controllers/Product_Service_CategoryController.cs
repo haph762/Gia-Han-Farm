@@ -1,6 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
+#nullable disable
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API._Servieces.Interfaces;
@@ -8,8 +6,6 @@ using API.Dtos;
 using API.Helpers.Params;
 using API.Helpers.Utilities;
 using Aspose.Cells;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers

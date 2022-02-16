@@ -1,4 +1,4 @@
-
+#nullable disable
 using API.Models;
 using Microsoft.EntityFrameworkCore;
 
