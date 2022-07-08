@@ -10,20 +10,14 @@ namespace API._Servieces.Services
 {
     public class AuthService : IAuthService
     {
-        private readonly IUserRepository _userRepository;
-        private readonly IRoleUserRepository _roleUserRepository;
+        private readonly IRepositoryAccessor _repository;
         private readonly IMapper _mapper;
         private readonly MapperConfiguration _mapperConfiguration;
         private readonly IConfiguration _configuration;
 
-        public AuthService(IUserRepository userRepository, 
-            IRoleUserRepository roleUserRepository, 
-            IMapper mapper, 
-            MapperConfiguration mapperConfiguration, 
-            IConfiguration configuration)
+        public AuthService(IRepositoryAccessor repository, IMapper mapper, MapperConfiguration mapperConfiguration, IConfiguration configuration)
         {
-            _userRepository = userRepository;
-            _roleUserRepository = roleUserRepository;
+            _repository = repository;
             _mapper = mapper;
             _mapperConfiguration = mapperConfiguration;
             _configuration = configuration;
@@ -31,12 +25,12 @@ namespace API._Servieces.Services
 
         public async Task<User_Logged_Dto> Login(string account, string password)
         {
-            var user = await _userRepository.FindAll(x =>x.User_Account.Trim() == account.Trim() && x.Password == password)
+            var user = await _repository.User.FindAll(x => x.User_Account.Trim() == account.Trim() && x.Password == password)
                 .ProjectTo<Users_Dto>(_mapperConfiguration)
                 .FirstOrDefaultAsync();
-            if(user == null)
+            if (user == null)
                 return null;
-            var userRoles = await _roleUserRepository.FindAll(x =>x.user_account == account).Select(x =>x.role_unique).ToListAsync();
+            var userRoles = await _repository.RoleUser.FindAll(x => x.user_account == account).Select(x => x.role_unique).ToListAsync();
             var userToReturn = new User_Logged_Dto
             {
                 User_Account = user.User_Account,

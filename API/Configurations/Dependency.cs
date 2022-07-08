@@ -10,13 +10,8 @@ namespace API.Configurations
         public static void AddDependencyUtilities(this IServiceCollection services)
         {
             if (services == null) throw new ArgumentNullException(nameof(services));
-            // Add Scoped
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IRolesRepository, RolesRepository>();
-            services.AddScoped<IRoleUserRepository, RoleUserRepository>();
-            services.AddScoped<INewsRepository, NewsRepository>();
-            services.AddScoped<IProduct_Service_CategoryRepository, Product_Service_CategoryRepository>();
-            services.AddScoped<IProduct_ServiceRepository, Product_ServiceRepository>();
+            // Add Repository
+            services.AddScoped<IRepositoryAccessor, RepositoryAccessor>();
             //Add service
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUsersService, UsersService>();
