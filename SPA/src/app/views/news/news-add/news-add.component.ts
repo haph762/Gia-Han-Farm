@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from '../../../../environments/environment';
 import { News } from '../../../_core/_models/news';
 import { AlertUtilityService } from '../../../_core/_services/alert-utility.service';
 import { NewsService } from '../../../_core/_services/news.service';
-import { commonPerProject } from '../../../_core/_untility/common-per-project';
 
 @UntilDestroy()
 @Component({
@@ -15,11 +15,11 @@ import { commonPerProject } from '../../../_core/_untility/common-per-project';
 })
 export class NewsAddComponent implements OnInit {
 
-  urlImage: string = commonPerProject.imageNews;
-  defaultImage: string = commonPerProject.imageUrl + "no-image.jpg";
-  image3: string = this.defaultImage; 
-  image2: string = this.defaultImage; 
-  image1: string = this.defaultImage; 
+  urlImage: string = environment.baseUrl + '/uploaded/images/news/';
+  defaultImage: string = environment.baseUrl + '/uploaded/images/' + 'no-image.jpg';
+  image3: string = this.defaultImage;
+  image2: string = this.defaultImage;
+  image1: string = this.defaultImage;
   news: News = {} as News;
   addImage2: boolean = false;
   addImage3: boolean = false;
@@ -33,7 +33,7 @@ export class NewsAddComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  onSelectFile(event, number){
+  onSelectFile(event, number) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
 
@@ -51,7 +51,7 @@ export class NewsAddComponent implements OnInit {
       // Images cannot be larger than 2MB
       const fileZise = event.target.files[0].size;
       if (fileZise > 6097152) {
-        this.alertService.warning('File is too big','Please select a Images cannot be larger than 5MB');
+        this.alertService.warning('File is too big', 'Please select a Images cannot be larger than 5MB');
         return;
       }
       //show images
@@ -79,7 +79,7 @@ export class NewsAddComponent implements OnInit {
 
       this.image2 = this.defaultImage;
       this.news.file2 = null;
-      this.addImage2 =false;
+      this.addImage2 = false;
 
       this.image3 = this.defaultImage;
       this.news.file3 = null;
@@ -96,65 +96,63 @@ export class NewsAddComponent implements OnInit {
       this.news.file3 = null;
     }
   }
-  saveNews(){
+  saveNews() {
     this.spinnerService.show();
-    if(this.news.title == null || this.news.title == ''){
+    if (this.news.title == null || this.news.title == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Title cannot be empty');
     }
-    if(this.news.short_Description == null || this.news.short_Description == ''){
+    if (this.news.short_Description == null || this.news.short_Description == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Short description cannot be empty');
     }
-    this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
-      if(res.success)
-      {
+    this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res => {
+      if (res.success) {
         this.spinnerService.hide();
         this.alertService.success('Successfuly', res.message);
         this.router.navigateByUrl('/posts/news/list');
-      }else{
+      } else {
         this.spinnerService.hide();
         this.alertService.error('Error', res.message);
       }
-    }, error =>{
+    }, error => {
       this.spinnerService.hide();
       console.log(error);
     });
   }
-  clear(){
-    this.news.title ='';
-    this.news.short_Description='';
-    this.news.contents='';
-    this.image1 =this.defaultImage;
-    this.image2 =this.defaultImage;
-    this.image3 =this.defaultImage;
+  clear() {
+    this.news.title = '';
+    this.news.short_Description = '';
+    this.news.contents = '';
+    this.image1 = this.defaultImage;
+    this.image2 = this.defaultImage;
+    this.image3 = this.defaultImage;
     this.news.file1 = null;
     this.news.file2 = null;
     this.news.file3 = null;
     this.addImage2 = false;
     this.addImage3 = false;
   }
-  saveAndNextNews(){
+  saveAndNextNews() {
     this.spinnerService.show();
-    if(this.news.title == null || this.news.title == ''){
+    if (this.news.title == null || this.news.title == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Title cannot be empty');
     }
-    if(this.news.short_Description == null || this.news.short_Description == ''){
+    if (this.news.short_Description == null || this.news.short_Description == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Short description cannot be empty');
     }
-    this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
-      if(res.success)
-      {
+    this.newsService.addNews(this.news).pipe(untilDestroyed(this)).subscribe(res => {
+      if (res.success) {
         this.spinnerService.hide();
         this.alertService.success('Successfuly', res.message);
         this.clear();
-      }else{
+      } else {
         this.spinnerService.hide();
         this.alertService.error('Error', res.message);
       }
-    }, error =>{
+    }, error => {
       this.spinnerService.hide();
       console.log(error);
     });

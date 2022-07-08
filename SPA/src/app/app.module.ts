@@ -51,10 +51,10 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { FormsModule } from '@angular/forms';
 import { SnotifyModule, SnotifyService, ToastDefaults } from 'ng-snotify';
 import { JwtModule } from '@auth0/angular-jwt';
-import { commonPerProject } from './_core/_untility/common-per-project';
 import { UserComponent } from './views/user/user.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { environment } from '../environments/environment';
 
 @NgModule({
   imports: [
@@ -77,8 +77,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: [commonPerProject.serverSentTokenInAppModule],
-        disallowedRoutes: [commonPerProject.linkSentTokenInAppModule]
+        allowedDomains: environment.allowedDomains,
+        disallowedRoutes: environment.disallowedRoutes
       }
     }),
     HttpClientModule,
@@ -102,10 +102,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     },
     AuthGuard,
     IconSetService,
-    { provide: 'SnotifyToastConfig', useValue: ToastDefaults},
+    { provide: 'SnotifyToastConfig', useValue: ToastDefaults },
     SnotifyService,
   ],
-  bootstrap: [ AppComponent ],
+  bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppModule { }

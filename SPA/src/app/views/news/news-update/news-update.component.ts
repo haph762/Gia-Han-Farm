@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from '../../../../environments/environment';
 import { News } from '../../../_core/_models/news';
 import { AlertUtilityService } from '../../../_core/_services/alert-utility.service';
 import { NewsService } from '../../../_core/_services/news.service';
-import { commonPerProject } from '../../../_core/_untility/common-per-project';
 
 @UntilDestroy()
 @Component({
@@ -15,14 +15,14 @@ import { commonPerProject } from '../../../_core/_untility/common-per-project';
 })
 export class NewsUpdateComponent implements OnInit {
 
-  urlImage: string = commonPerProject.imageNews;
-  defaultImage: string = commonPerProject.imageUrl + "no-image.jpg";
-  oldimage3: string = this.defaultImage; 
-  oldimage2: string = this.defaultImage; 
-  oldimage1: string = this.defaultImage;  
-  image3: string = this.defaultImage; 
-  image2: string = this.defaultImage; 
-  image1: string = this.defaultImage;  
+  urlImage: string = environment.baseUrl + '/uploaded/images/news/';
+  defaultImage: string = environment.baseUrl + '/uploaded/images/' + 'no-image.jpg';
+  oldimage3: string = this.defaultImage;
+  oldimage2: string = this.defaultImage;
+  oldimage1: string = this.defaultImage;
+  image3: string = this.defaultImage;
+  image2: string = this.defaultImage;
+  image1: string = this.defaultImage;
   news_id: number;
   news: News = {} as News;
   existImage1: boolean = false;
@@ -46,38 +46,38 @@ export class NewsUpdateComponent implements OnInit {
     this.loadNewsByID();
   }
 
-  loadNewsByID(){
+  loadNewsByID() {
     this.spinnerService.show();
     this.newsService.getnewsbyid(this.news_id).pipe(untilDestroyed(this)).subscribe(res => {
       this.spinnerService.hide();
       this.news = res;
-      if(this.news.image != null){
-        if(this.news.urlImages[0] != ""){
-          this.oldimage1 =this.urlImage + this.news.urlImages[0];
+      if (this.news.image != null) {
+        if (this.news.urlImages[0] != "") {
+          this.oldimage1 = this.urlImage + this.news.urlImages[0];
         }
-        if(this.news.urlImages[1] != ""){
-          this.oldimage2 =this.urlImage + this.news.urlImages[1];
+        if (this.news.urlImages[1] != "") {
+          this.oldimage2 = this.urlImage + this.news.urlImages[1];
           this.existImage2 = true;
         }
-        if(this.news.urlImages[1] != "" && this.news.urlImages[2] != ""){
-          this.oldimage3 =this.urlImage + this.news.urlImages[2];
+        if (this.news.urlImages[1] != "" && this.news.urlImages[2] != "") {
+          this.oldimage3 = this.urlImage + this.news.urlImages[2];
           this.existImage3 = true;
         }
       }
-    }, error =>{
+    }, error => {
       console.log(error);
       this.spinnerService.hide();
     });
   }
-  uploadNewImages(){
+  uploadNewImages() {
     this.oldImages = false;
     this.newImages = true;
   }
-  undoImages(){
+  undoImages() {
     this.oldImages = true;
     this.newImages = false;
   }
-  onSelectFile(event, number){
+  onSelectFile(event, number) {
     if (event.target.files && event.target.files[0]) {
       const reader = new FileReader();
 
@@ -95,7 +95,7 @@ export class NewsUpdateComponent implements OnInit {
       // Images cannot be larger than 2MB
       const fileZise = event.target.files[0].size;
       if (fileZise > 6097152) {
-        this.alertService.warning('File is too big','Please select a Images cannot be larger than 5MB');
+        this.alertService.warning('File is too big', 'Please select a Images cannot be larger than 5MB');
         return;
       }
       //show images
@@ -106,7 +106,7 @@ export class NewsUpdateComponent implements OnInit {
           this.news.file1 = file;
           this.addImage2 = true;
           this.uploadNewImages();
-        }else if (number == 1) {
+        } else if (number == 1) {
           this.image1 = event.target.result.toString();
           this.news.file1 = file;
           this.addImage2 = true;
@@ -128,7 +128,7 @@ export class NewsUpdateComponent implements OnInit {
 
       this.image2 = this.defaultImage;
       this.news.file2 = null;
-      this.addImage2 =false;
+      this.addImage2 = false;
 
       this.image3 = this.defaultImage;
       this.news.file3 = null;
@@ -145,38 +145,37 @@ export class NewsUpdateComponent implements OnInit {
       this.news.file3 = null;
     }
   }
-  saveNews(){
+  saveNews() {
     this.spinnerService.show();
-    if(this.news.title == null || this.news.title == ''){
+    if (this.news.title == null || this.news.title == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Title cannot be empty');
     }
-    if(this.news.short_Description == null || this.news.short_Description == ''){
+    if (this.news.short_Description == null || this.news.short_Description == '') {
       this.spinnerService.hide();
       return this.alertService.error('Error', 'Short description cannot be empty');
     }
-    this.newsService.updateNews(this.news).pipe(untilDestroyed(this)).subscribe(res =>{
-      if(res.success)
-      {
+    this.newsService.updateNews(this.news).pipe(untilDestroyed(this)).subscribe(res => {
+      if (res.success) {
         this.spinnerService.hide();
         this.alertService.success('Successfuly', res.message);
         this.router.navigateByUrl('/posts/news/list');
-      }else{
+      } else {
         this.spinnerService.hide();
         this.alertService.error('Error', res.message);
       }
-    }, error =>{
+    }, error => {
       this.spinnerService.hide();
       console.log(error);
     });
   }
-  clear(){
-    this.news.title ='';
-    this.news.short_Description='';
-    this.news.contents='';
-    this.image2 =this.defaultImage;
-    this.image1 =this.defaultImage;
-    this.image3 =this.defaultImage;
+  clear() {
+    this.news.title = '';
+    this.news.short_Description = '';
+    this.news.contents = '';
+    this.image2 = this.defaultImage;
+    this.image1 = this.defaultImage;
+    this.image3 = this.defaultImage;
     this.news.file1 = null;
     this.news.file2 = null;
     this.news.file3 = null;
@@ -184,7 +183,7 @@ export class NewsUpdateComponent implements OnInit {
     this.addImage3 = false;
     this.uploadNewImages();
   }
-  cancel(){
+  cancel() {
     this.loadNewsByID();
     this.oldImages = true;
     this.newImages = false;

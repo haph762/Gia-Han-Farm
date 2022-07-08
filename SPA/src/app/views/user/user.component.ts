@@ -7,11 +7,11 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SnotifyPosition } from 'ng-snotify';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { environment } from '../../../environments/environment';
 import { RoleUserAuthorize } from '../../_core/_models/role-user';
 import { Users } from '../../_core/_models/users';
 import { AlertUtilityService } from '../../_core/_services/alert-utility.service';
 import { UserService } from '../../_core/_services/user.service';
-import { commonPerProject } from '../../_core/_untility/common-per-project';
 import { Pagination } from '../../_core/_untility/pagination';
 
 @UntilDestroy()
@@ -30,10 +30,11 @@ export class UserComponent implements OnInit {
   roles: RoleUserAuthorize[] = [];
   isAllRolesChecked: boolean = false;
   pagination: Pagination;
-  text: string='';
+  text: string = '';
   flag: number;
-  imageUserUrl = commonPerProject.imageUserUrl;
-  imageUser: any ='';
+  imageUserDefault: string = '../../../assets/img/avatars/user.png';
+  imageUserUrl: string = environment.baseUrl + '/uploaded/images/user/';
+  imageUser: any = '';
   currentUser: Users = JSON.parse(localStorage.getItem('user'));
   registrationForm = this.fb.group({
     file: [null]
@@ -51,16 +52,16 @@ export class UserComponent implements OnInit {
 
   ngOnInit(): void {
     this.spinnerService.show();
-    this.route.data.subscribe(data =>{
+    this.route.data.subscribe(data => {
       this.users = data.dataUser.result;
       this.pagination = data.dataUser.pagination;
       this.spinnerService.hide();
-    }, error =>{
+    }, error => {
       this.spinnerService.hide();
     });
   }
 
-  pageChanged(event: any){
+  pageChanged(event: any) {
     this.pagination.currentPage = event.page;
     this.loadUsers();
   }
@@ -74,40 +75,39 @@ export class UserComponent implements OnInit {
       }, error => {
         console.log(error);
       }
-    );
+      );
   }
 
-  clear(){
-    this.text ='';
+  clear() {
+    this.text = '';
     this.loadUsers();
-    this.pagination.currentPage=1;
+    this.pagination.currentPage = 1;
   }
 
-  deleteUser(account: string){
-    this.alertService.confirmDelete("Are you sure you want to delete account '" + account.toUpperCase() + "' ?", SnotifyPosition.centerCenter, () =>{
-      
+  deleteUser(account: string) {
+    this.alertService.confirmDelete("Are you sure you want to delete account '" + account.toUpperCase() + "' ?", SnotifyPosition.centerCenter, () => {
+
       //administrator can't be removed
-      if(account == 'administrator'){
+      if (account == 'administrator') {
         this.alertService.error('Error', 'User administrator cannot be deleted!');
-      }else if(account == this.currentUser.user_Account){
+      } else if (account == this.currentUser.user_Account) {
         this.alertService.error('Error', 'The current user cannot be deleted!');
-      }else{
+      } else {
         this.spinnerService.show();
         this.userService.deleteUser(account)
           .pipe(untilDestroyed(this))
-          .subscribe(res =>{
+          .subscribe(res => {
             this.spinnerService.hide();
-            if(res.success){
-              if(this.pagination.currentPage == 2 && this.pagination.totalCount == 11)
-              {
-                this.pagination.currentPage =1;
+            if (res.success) {
+              if (this.pagination.currentPage == 2 && this.pagination.totalCount == 11) {
+                this.pagination.currentPage = 1;
               }
               this.loadUsers();
               this.alertService.success("Deleted", res.message);
-            }else{
+            } else {
               this.alertService.error("Error!", res.message);
             }
-          }, error =>{
+          }, error => {
             console.log(error);
             this.spinnerService.hide();
           });
@@ -115,125 +115,125 @@ export class UserComponent implements OnInit {
     });
   }
 
-  setUser(user: Users){
-    this.user = {...user };
-    this.imageUser = user.image != null ? this.imageUserUrl + user.image
-      : commonPerProject.imageUserDefault;
-    
+  setUser(user: Users) {
+    this.user = { ...user };
+    this.imageUser = user.image !== null ? this.imageUserUrl + user.image
+      : this.imageUserDefault;
+
   }
 
   setAuthorizeList() {
     this.spinnerService.show();
     this.userService.getRoleUser(this.user.user_Account)
-    .pipe(untilDestroyed(this))
+      .pipe(untilDestroyed(this))
       .subscribe((roles: RoleUserAuthorize[]) => {
         this.roles = roles;
         this.checkIfAllRolesChecked();
         this.spinnerService.hide();
-        
+
       }, error => {
         console.log(error);
         this.spinnerService.hide();
       });
   }
 
-  checkIfAllRolesChecked(){
+  checkIfAllRolesChecked() {
     let isChecked = true;
-    this.roles.forEach(role =>{
-      if(!role.status)
+    this.roles.forEach(role => {
+      if (!role.status)
         isChecked = false;
     });
-    if(isChecked)
+    if (isChecked)
       this.isAllRolesChecked = true;
     else
       this.isAllRolesChecked = false;
   }
 
-  roleChanges(role: RoleUserAuthorize){
+  roleChanges(role: RoleUserAuthorize) {
     role.status = !role.status;
     this.checkIfAllRolesChecked();
   }
 
-  allRolesChanges(){
+  allRolesChanges() {
     this.isAllRolesChecked = !this.isAllRolesChecked;
-    if(this.isAllRolesChecked){
-      this.roles.forEach(role =>{
-        role.status =true;
+    if (this.isAllRolesChecked) {
+      this.roles.forEach(role => {
+        role.status = true;
       });
-    }else{
-      this.roles.forEach( role =>{
+    } else {
+      this.roles.forEach(role => {
         role.status = false;
       });
     }
   }
 
-  authorizeSave(){
+  authorizeSave() {
     this.spinnerService.show();
     this.userService.updateRoles(this.roles)
       .pipe(untilDestroyed(this))
-      .subscribe(res =>{
-        if(res.success){
+      .subscribe(res => {
+        if (res.success) {
           this.spinnerService.hide();
           this.alertService.success("Successfuly!", res.message);
           this.authorizeModal.hide();
           this.loadUsers();
-        }else{
+        } else {
           this.alertService.error("Error!", res.message);
         }
-      }, error =>{
+      }, error => {
         this.spinnerService.hide();
       });
   }
 
-  setFlag(flag: number){
-    this.flag= flag;
+  setFlag(flag: number) {
+    this.flag = flag;
   }
 
-  resetUser(){
-    this.user.user_Account ='';
-    this.user.user_Name="";
-    this.user.password ="";
-    this.user.email ="";
-    this.user.phone_Number ="";
-    this.imageUser = commonPerProject.imageUserDefault;
+  resetUser() {
+    this.user.user_Account = '';
+    this.user.user_Name = "";
+    this.user.password = "";
+    this.user.email = "";
+    this.user.phone_Number = "";
+    this.imageUser = this.imageUserDefault;
   }
 
-  addOrEditUser(){
-    if(!this.validate())
+  addOrEditUser() {
+    if (!this.validate())
       return;
     //add
-    if(this.flag == 0){
+    if (this.flag == 0) {
       this.spinnerService.show();
       this.userService.addUser(this.user, this.file)
         .pipe(untilDestroyed(this))
-        .subscribe(res =>{
+        .subscribe(res => {
           this.spinnerService.hide();
-          if(res.success){
+          if (res.success) {
             this.alertService.success("Successfuly!", res.message);
             this.loadUsers();
             this.addUserModal.hide();
-          }else{
+          } else {
             this.alertService.error("Error!", res.message);
           }
-        }, error =>{
+        }, error => {
           console.log(error);
           this.spinnerService.hide();
         });
-    }else{
+    } else {
       //edit
       this.spinnerService.show();
       this.userService.updateUser(this.user, this.file)
         .pipe(untilDestroyed(this))
-        .subscribe(res =>{
+        .subscribe(res => {
           this.spinnerService.hide();
-          if(res.success){
+          if (res.success) {
             this.alertService.success("Successfuly!", res.message);
             this.loadUsers();
             this.addUserModal.hide();
-          }else{
+          } else {
             this.alertService.error("Error!", res.message);
           }
-        }, error =>{
+        }, error => {
           console.log(error);
           this.spinnerService.hide();
         });
@@ -287,7 +287,7 @@ export class UserComponent implements OnInit {
     if (this.user.image === undefined)
       this.user.image = null;
     this.imageUser = this.user.image !== null ? this.imageUserUrl + this.user.image
-                                              : commonPerProject.imageUserDefault;
+      : this.imageUserDefault;
     this.editFile = true;
     this.removeUpload = false;
     this.registrationForm.patchValue({
