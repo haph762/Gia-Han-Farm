@@ -6,7 +6,7 @@ namespace API._Repositories.Repositories
 {
     public class RolesRepository : Repository<Roles>, IRolesRepository
     {
-        public RolesRepository(ProjectContext context) : base(context)
+        public RolesRepository(GHFContext context) : base(context)
         {
         }
     }

@@ -6,7 +6,7 @@ namespace API._Repositories.Repositories
 {
     public class Product_ServiceRepository : Repository<Product_Service>, IProduct_ServiceRepository
     {
-        public Product_ServiceRepository(ProjectContext context) : base(context)
+        public Product_ServiceRepository(GHFContext context) : base(context)
         {
         }
     }

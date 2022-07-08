@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Data
 {
-    public partial class ProjectContext : DbContext
+    public partial class GHFContext : DbContext
     {
         public virtual DbSet<Users> Users { get; set; }
         public virtual DbSet<Roles> Roles { get; set; }
         public virtual DbSet<RoleUser> RoleUser { get; set; }
-        public virtual DbSet<News> News {get; set;}
+        public virtual DbSet<News> News { get; set; }
         public virtual DbSet<Product_Service> Product_Service { get; set; }
         public virtual DbSet<Product_Service_Category> Product_Service_Category { get; set; }
-        
-        public ProjectContext(DbContextOptions<ProjectContext> options) : base(options)
+
+        public GHFContext(DbContextOptions<GHFContext> options) : base(options)
         {
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -32,8 +32,8 @@ namespace API.Data
             });
             modelBuilder.Entity<News>(entity =>
             {
-                entity.HasKey(e => new{ e.News_ID});
-                
+                entity.HasKey(e => new { e.News_ID });
+
                 entity.Property(e => e.News_ID).ValueGeneratedOnAdd();
             });
             modelBuilder.Entity<Product_Service>(entity =>
@@ -51,7 +51,7 @@ namespace API.Data
 
                 entity.Property(e => e.Update_By).IsUnicode(false);
             });
-            
+
             OnModelCreatingPartial(modelBuilder);
         }
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

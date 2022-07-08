@@ -6,7 +6,7 @@ namespace API._Repositories.Repositories
 {
     public class UserRepository : Repository<Users>, IUserRepository
     {
-        public UserRepository(ProjectContext context) : base(context)
+        public UserRepository(GHFContext context) : base(context)
         {
         }
     }

@@ -7,9 +7,9 @@ namespace API._Repositories.Repositories
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private readonly ProjectContext _context;
+        private readonly GHFContext _context;
 
-        public Repository(ProjectContext context)
+        public Repository(GHFContext context)
         {
             _context = context;
         }
@@ -27,7 +27,7 @@ namespace API._Repositories.Repositories
         public IQueryable<T> FindAll(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
-            if(includeProperties != null)
+            if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties)
                 {
@@ -40,7 +40,7 @@ namespace API._Repositories.Repositories
         public IQueryable<T> FindAll(params Expression<Func<T, object>>[] includeProperties)
         {
             IQueryable<T> items = _context.Set<T>();
-            if(includeProperties != null)
+            if (includeProperties != null)
             {
                 foreach (var includeProperty in includeProperties)
                 {

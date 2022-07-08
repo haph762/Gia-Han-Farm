@@ -6,7 +6,7 @@ namespace API._Repositories.Repositories
 {
     public class NewsRepository : Repository<News>, INewsRepository
     {
-        public NewsRepository(ProjectContext context) : base(context)
+        public NewsRepository(GHFContext context) : base(context)
         {
         }
     }
