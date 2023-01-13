@@ -1,7 +1,7 @@
 import { ChangeDetectorRef } from '@angular/core';
 import { ViewChild } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { UntypedFormBuilder } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { SnotifyPosition } from 'ng-snotify';
@@ -44,7 +44,7 @@ export class UserComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService,
-    private fb: FormBuilder,
+    private fb: UntypedFormBuilder,
     private spinnerService: NgxSpinnerService,
     private alertService: AlertUtilityService,
     private cd: ChangeDetectorRef,
