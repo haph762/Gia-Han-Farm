@@ -1,0 +1,56 @@
+<header>
+    <nav class="navbar">
+        <label for="iconMenu">
+            <fa-icon [icon]="faBars"></fa-icon>
+        </label>
+        <input type="checkbox" name="iconMenu" id="iconMenu">
+        <div class="logo"><img src="../assets/logo.png" routerLink="" alt=""></div>
+        <ul class="menu menu-responsive">
+            <label for="iconMenu" class="faClose">
+                <fa-icon [icon]="faClose"></fa-icon>
+            </label>
+            <li><a href="http://localhost:4200/">Trang Chủ</a></li>
+            <li><a href="http://localhost:4200/">Giới Thiệu</a></li>
+            <li class="product"><a href="http://localhost:4200/">Sản Phẩm
+                    <fa-icon [icon]="faChevronDown"></fa-icon>
+                    <fa-icon [icon]="faChevronUp"></fa-icon>
+                </a>
+                <ul class="product-list">
+                    <li><a href="http://localhost:4200/">Rau Củ</a></li>
+                    <li><a href="http://localhost:4200/">Hải Sản</a></li>
+                    <li><a href="http://localhost:4200/">Hoa Quả</a></li>
+                    <li><a href="http://localhost:4200/">Thưc phẩm tươi sống</a></li>
+                </ul>
+            </li>
+            <li><a href="http://localhost:4200/">Tin tức</a></li>
+            <li><a href="http://localhost:4200/">Liên Hệ</a></li>
+        </ul>
+        <div class="admin">
+            <div class="search">
+                <fa-icon [icon]="faSearch"></fa-icon>
+                <div class="search-detail">
+                    <form class="search-detail-from">
+                        <input type="text" name="search" id="search">
+                        <fa-icon [icon]="faSearch"></fa-icon>
+                    </form>
+                </div>
+            </div>
+            <div class="user">
+                <fa-icon [icon]="faUserPlus"></fa-icon>
+                <div class="user-detail">
+                    <a routerLink="/admin/login"><button>Login</button></a>
+                    <a routerLink="/admin/register"><button>Register</button></a>
+                </div>
+            </div>
+            <div class="cart">
+                <fa-icon [icon]="faBasketShopping"></fa-icon>
+                <div class="cart-detail-count">0</div>
+                <div class="cart-detail">
+                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

@@ -1,0 +1,367 @@
+//menu
+.navbar {
+    padding: 0 10px;
+    width: 100%;
+    height: 110px;
+    background-color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 1;
+    position: fixed;
+
+    .logo {
+        img {
+            width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+    }
+
+    ul>li {
+        display: inline;
+        padding: 0 20px;
+        font-size: 20px;
+        color: green;
+    }
+
+
+    label>fa-icon,
+    #iconMenu {
+        font-size: 25px;
+        display: none;
+    }
+
+}
+
+ul>li>a {
+    text-decoration: none;
+    font-family: 'MyFont';
+    color: rgba(0, 0, 0, 0.799);
+}
+
+ul>li>a:hover {
+    color: green;
+}
+
+i {
+    color: black;
+}
+
+//product
+.product {
+    position: relative;
+}
+
+.product-list {
+    display: none;
+}
+
+.product>a>fa-icon:nth-child(2) {
+    display: none;
+}
+
+.product:hover>a>fa-icon:nth-child(2) {
+    display: inline;
+}
+
+.product:hover>a>fa-icon:nth-child(1) {
+    display: none;
+}
+
+
+.product:hover>.product-list {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1rem 0;
+
+    li {
+        list-style: none;
+        padding: 0.5rem;
+        width: 250px;
+    }
+
+    background-color: white;
+    animation-name: animation-product;
+    animation-duration: 0.5s;
+}
+
+@keyframes animation-product {
+    from {
+        transform: rotateX(90deg);
+    }
+
+    to {
+        transform: rotateX(0deg);
+    }
+}
+
+// faIcon
+.admin {
+    width: 150px;
+    display: flex;
+    justify-content: space-around;
+
+    fa-icon {
+        padding: 15px;
+    }
+}
+
+//search
+.search,
+.user,
+.cart {
+    position: relative;
+}
+
+.search-detail {
+    display: none;
+}
+
+.search:hover>.search-detail::before {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    width: 8rem;
+    height: 1.2rem;
+}
+
+.search:hover>.search-detail {
+    position: absolute;
+    right: 1rem;
+    top: 2rem;
+    display: flex;
+
+    form {
+        input[type="text"] {
+            color: white;
+            width: 250px;
+            font-size: 19px;
+            padding: 12px 12px;
+            padding-right: 45px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border-radius: 2rem;
+            margin-bottom: 8px;
+            border: none;
+            outline: none;
+            background: linear-gradient(to right, #33cc33 0%, #ffcc66 100%);
+
+        }
+    }
+}
+
+.search-detail-from {
+    position: relative;
+
+    fa-icon {
+        position: absolute;
+        right: 0;
+        top: 5px;
+        color: white;
+    }
+}
+
+//user
+
+.user-detail {
+    display: none;
+    width: 12rem;
+    height: 6rem;
+    border-radius: 15px;
+    border: 1px green solid;
+    background-color: white;
+}
+
+.user:hover>.user-detail::before {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    width: 5rem;
+    height: 1rem;
+}
+
+.user:hover>.user-detail {
+    position: absolute;
+    right: -1rem;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        text-decoration: none;
+    }
+
+    button {
+        cursor: pointer;
+        display: block;
+        margin: 2px 0;
+        width: 9rem;
+        height: 35px;
+        border: none;
+        color: white;
+        border-radius: 2rem;
+        background: linear-gradient(to right, #99ff99 0%, #ff5050 100%);
+
+    }
+}
+
+//cart
+
+.cart-detail {
+    display: none;
+    width: 18rem;
+    height: auto;
+    border-radius: 15px;
+    border: 1px green solid;
+    background-color: white;
+}
+
+.cart-detail-count {
+    background: linear-gradient(to right, #99ff99 0%, #ff5050 100%);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    padding: 0.3rem;
+    text-align: center;
+    color: white;
+    position: absolute;
+    top: -1.5rem;
+    right: 0;
+    cursor: default;
+    font-weight: 800;
+}
+
+.cart:hover>.cart-detail::before {
+    content: " ";
+    position: absolute;
+    right: 0;
+    top: -1rem;
+    width: 8rem;
+    height: 1rem;
+}
+
+.cart:hover>.cart-detail {
+    position: absolute;
+    right: -0.5rem;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem 0;
+}
+
+//responsive
+@media (max-width: 1200px) {
+    .navbar {
+        .logo {
+            img {
+                width: 80%;
+            }
+        }
+    }
+
+    .menu {
+        display: none;
+
+    }
+
+    .navbar>label>fa-icon {
+        cursor: pointer;
+        display: block;
+    }
+
+    input[type="checkbox"]:checked~.menu-responsive {
+        overflow-y: scroll;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        height: 100%;
+        padding: 0 2rem;
+        margin: 0;
+        width: 40%;
+        background-color: #9fbc4c;
+        animation: open-menu;
+        animation-duration: 0.5s;
+        -ms-overflow-style: none;
+        /* IE and Edge */
+        scrollbar-width: none;
+
+        li {
+            padding: 1rem;
+            font-size: 18px;
+        }
+
+        .product-list {
+            margin: 0;
+            padding: 0.3rem 0;
+            position: relative;
+            background-color: #9fbc4c;
+
+            li {
+                width: 100%;
+                flex-wrap: wrap;
+            }
+        }
+    }
+
+    input[type="checkbox"]:checked~.menu-responsive::-webkit-scrollbar {
+        display: none;
+    }
+
+    input[type="checkbox"]:checked~.menu-responsive>label>fa-icon {
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        padding: 10px;
+        font-size: 30px;
+        display: inline;
+        cursor: pointer;
+        color: white;
+    }
+
+    @keyframes open-menu {
+        from {
+            transform: scaleX(0);
+        }
+
+        to {
+            transform: scale(100%);
+        }
+    }
+}
+
+@media (max-width: 600px) {
+    .navbar {
+        .logo {
+            img {
+                width: 60%;
+                height: auto;
+                cursor: pointer;
+            }
+        }
+
+    }
+
+    // faIcon
+    .admin {
+        width: 100px;
+
+        fa-icon {
+            font-size: 15px;
+            padding: 10px;
+        }
+    }
+}

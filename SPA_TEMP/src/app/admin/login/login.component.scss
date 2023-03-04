@@ -1,0 +1,107 @@
+.container {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 5px 15px rgba(127, 255, 212, 0.733);
+    background-color: rgba(127, 255, 212, 0.53);
+    border-radius: 2px;
+    padding: 1rem;
+    width: 690px;
+    height: 300px;
+
+    .loginLeft {
+        flex-grow: 1;
+        padding: 0 1rem;
+
+        img {
+            padding: 2rem;
+            width: 250px;
+            border-radius: 50%;
+        }
+    }
+
+    .loginRight {
+        flex-grow: 10;
+        padding: 0 1rem;
+
+        h2 {
+            cursor: default;
+            text-align: center;
+            color: white;
+        }
+    }
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+
+    label {
+        color: white;
+    }
+}
+
+input[type=email],
+input[type=password] {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 8px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.btnLogin {
+    margin-top: 5px;
+    width: 100%;
+    height: 2rem;
+    background-color: green;
+    border: none;
+    color: white;
+    align-self: flex-end;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 800px) {
+    .navbar {
+        height: 6vh;
+        justify-content: center;
+
+        .logo {
+            img {
+                width: 4rem;
+            }
+        }
+
+        ul {
+            display: none;
+        }
+    }
+
+    .login {
+        display: block;
+        flex-direction: column;
+        width: 400px;
+        height: 500px;
+
+        .loginLeft {
+            text-align: center;
+        }
+    }
+}
