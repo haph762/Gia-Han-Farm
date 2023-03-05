@@ -1,0 +1,138 @@
+//danh muc sản phẩm
+.tab-detail {
+    justify-content: space-evenly;
+}
+
+.tab-button {
+    margin: 0 auto;
+    padding: 2rem 0;
+    display: flex;
+    justify-content: space-around;
+
+    button {
+        height: 39px;
+        background-color: white;
+        border: 1px solid rgba(0, 0, 0, 0.418);
+        border-radius: 2rem;
+        color: black;
+    }
+
+    .tab-button-active {
+        background-color: #91ad41;
+        color: white;
+    }
+}
+
+.tab-button>button:hover {
+    background-color: #91ad41;
+    color: white;
+}
+
+.tab-description {
+    width: 100%;
+    height: auto;
+    border: 1px solid rgba(89, 89, 89, 0.205);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    margin: 1.5rem 0;
+
+    .tab-description-body {
+        position: relative;
+        padding: 2rem 0;
+        text-align: center;
+        height: 13rem;
+
+        img {
+            width: 100%;
+            max-height: 10rem;
+            object-fit: cover;
+        }
+    }
+}
+
+.tab-description:hover {
+    cursor: pointer;
+    box-shadow: 5px 10px 18px #888888;
+}
+
+.tab-description-footer {
+    padding: 1.5rem;
+    flex-grow: 1;
+    background-color: rgba(205, 205, 205, 0.545);
+
+    :nth-child(1) {
+        font-weight: 900;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    :nth-child(2) {
+        font-weight: 600;
+        padding: 0.2rem;
+        color: #63c863;
+        font-size: 14px;
+
+    }
+
+    :nth-child(2)::after {
+        content: 'đ';
+
+    }
+
+    :nth-child(3) {
+        padding: 0.2rem;
+        font-size: 12px;
+        text-decoration: line-through;
+    }
+
+    :nth-child(3)::after {
+        content: 'đ';
+        text-decoration: line-through;
+    }
+}
+
+.tab-description-cart {
+    display: none;
+}
+
+.tab-description:hover>.tab-description-body::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(147, 147, 147, 0.182);
+
+}
+
+.tab-description:hover>.tab-description-cart {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    fa-icon {
+        margin: 0.2rem;
+        margin-top: 5rem;
+        border-radius: 50%;
+        padding: 0.8rem;
+        background-color: white;
+    }
+
+    :hover {
+        background-color: #99ff99;
+        color: white;
+    }
+}

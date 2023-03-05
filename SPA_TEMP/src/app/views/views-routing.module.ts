@@ -1,11 +1,10 @@
-import { IndexComponent } from './index/index.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
+    loadChildren: () => import('./index/index.module').then(x => x.IndexModule)
   }
 ];
 

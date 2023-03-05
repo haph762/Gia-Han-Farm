@@ -1,0 +1,94 @@
+//danh muc sản phẩm
+.new-detail {
+    justify-content: center;
+}
+
+.new-description {
+    width: 100%;
+    min-height: 40rem;
+    border: 1px solid rgba(89, 89, 89, 0.205);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: black;
+    position: relative;
+    margin: 1.5rem 0;
+
+    .new-description-body {
+        position: relative;
+        padding: 2rem 0;
+        text-align: center;
+        // height: 25rem;
+
+        img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+        }
+
+
+    }
+}
+
+.new-description-body-time {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(205, 205, 205, 0.164);
+    font-size: 13px;
+
+    :nth-child(1) {
+        color: #63c863;
+    }
+
+    :nth-child(2) {
+        span {
+
+            color: #63c863;
+        }
+    }
+}
+
+.new-description-footer {
+    padding: 1.5rem;
+    flex-grow: 1;
+    background-color: rgba(205, 205, 205, 0.545);
+    height: 10rem;
+
+    :nth-child(1) {
+        display: -webkit-box;
+        font-weight: 500;
+        font-size: 18px;
+        max-height: 5.2rem;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 3;
+        line-height: 1.6rem;
+    }
+
+    :nth-child(2) {
+        display: -webkit-box;
+        max-height: 3.2rem;
+        font-size: 15px;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: normal;
+        -webkit-line-clamp: 2;
+        line-height: 1.6rem;
+
+    }
+}
+
+.new-description:hover>.new-description-footer {
+    box-shadow: 5px 10px 18px #888888;
+
+    :nth-child(1) {
+        color: #63c863;
+    }
+
+}

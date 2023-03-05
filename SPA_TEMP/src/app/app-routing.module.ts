@@ -5,7 +5,15 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    component: IndexComponent,
+    data: {
+      title: 'index'
+    },
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('./views/views.module').then(m => m.ViewsModule),
+      }
+    ]
   },
   {
     path: 'admin',

@@ -18,6 +18,15 @@ builder.Services.AddAutoMapperUtilities();
 
 //add Dependency
 builder.Services.AddDependencyUtilities();
+builder.Services.AddDistributedMemoryCache();
+
+builder.Services.AddSession(options =>
+{
+    options.Cookie.Name = "SessionTest";
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 
 // Add Middleware
 builder.Services.AddTransient<ExceptionHandlingMiddleware>();
@@ -54,7 +63,22 @@ app.UseAuthorization();
 app.UseStaticFiles();
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
+app.UseSession();
+app.UseEndpoints(o =>
+{
+    o.MapGet("/SessionTest", async (context) =>
+    {
+        int? count = context.Session.GetInt32("SessionTest");
+        if (count == null)
+        {
+            count = 0;
+        }
+        count += 1;
 
+        context.Session.SetInt32("SessionTest", count.Value);
+        await context.Response.WriteAsync($"this is test, session = {count}");
+    });
+});
 app.MapControllers();
 
 app.Run();
