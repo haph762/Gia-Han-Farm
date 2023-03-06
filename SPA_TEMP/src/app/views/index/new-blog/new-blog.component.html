@@ -1,9 +1,14 @@
 <div class="background-white tab">
     <div class="grid wide">
         <div class="row">
-            <div class="l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title">
+            <div class="l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title" *ngIf="isIndex; else menuNewBlog">
                 <h2>Tin tức mới nhất</h2>
             </div>
+            <ng-template #menuNewBlog>
+                <div class="col l-3 m-8 c-10 l-o-1 m-o-1 c-o-1 tab-new-blog-title">
+                    <h2>Tin tức</h2>
+                </div>
+            </ng-template>
         </div>
         <div class="row new-detail">
             <div class="col l-3 m-8 c-10">

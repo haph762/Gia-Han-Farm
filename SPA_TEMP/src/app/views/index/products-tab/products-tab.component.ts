@@ -10,7 +10,8 @@ export class ProductsTabComponent implements OnInit {
 
   faSearch = faSearch;
   faBasketShopping = faBasketShopping;
-  @Input() isTabProduct: boolean = true;
+  @Input() isIndex: boolean = true;
+  @Input() isBestSale: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

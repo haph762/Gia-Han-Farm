@@ -1,14 +1,41 @@
 <div class="background-white tab">
     <div class="grid wide">
-        <div class="row">
-            <div class="l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title">
+        <div class="row" *ngIf="isIndex">
+            <div class="col l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title" *ngIf="isBestSale">
                 <h2>Danh Mục sản phẩm</h2>
-                <div class="tab-button" *ngIf="isTabProduct">
+                <div class="tab-button">
                     <button type="button" class="tab-button-active">Rau củ</button>
                     <button type="button">Hoa quả</button>
                     <button type="button">Hải sản</button>
                     <button type="button">Các loại hạt</button>
                     <button type="button">Thưc phẩm tươi sống</button>
+                </div>
+            </div>
+            <div class="col l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title" *ngIf="!isBestSale">
+                <h2>Sản phẩm bán chạy</h2>
+            </div>
+        </div>
+        <div class="row" *ngIf="!isIndex">
+            <div class="tab-product-col">
+                <h2>Tất cả sản phẩm</h2>
+                <div class="filter">
+                    <p>Sắp xếp theo:</p>
+                    <div class="filter-item">
+                        <input type="radio" name="filter" id="new">
+                        <label for="new">Mới nhất</label>
+                    </div>
+                    <div class="filter-item">
+                        <input type="radio" name="filter" id="old">
+                        <label for="old">Cũ nhất</label>
+                    </div>
+                    <div class="filter-item">
+                        <input type="radio" name="filter" id="expensive">
+                        <label for="expensive">Giá cao</label>
+                    </div>
+                    <div class="filter-item">
+                        <input type="radio" name="filter" id="low">
+                        <label for="low">Giá Thấp</label>
+                    </div>
                 </div>
             </div>
         </div>

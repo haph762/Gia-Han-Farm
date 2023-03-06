@@ -28,6 +28,10 @@ import { CarouselModule } from 'ngx-bootstrap/carousel';
     IndexRoutingModule,
     FontAwesomeModule,
     CarouselModule.forRoot()
+  ],
+  exports:[
+    ProductsTabComponent,
+    NewBlogComponent
   ]
 })
 export class IndexModule { }

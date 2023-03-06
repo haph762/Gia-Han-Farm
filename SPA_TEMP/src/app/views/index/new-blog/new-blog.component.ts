@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -9,6 +9,7 @@ import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 export class NewBlogComponent implements OnInit {
 
   faCalendar = faCalendar;
+  @Input() isIndex: boolean = true;
   constructor() { }
 
   ngOnInit(): void {

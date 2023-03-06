@@ -5,10 +5,11 @@ import { ViewsRoutingModule } from './views-routing.module';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+  ],
   imports: [
     CommonModule,
-    ViewsRoutingModule
+    ViewsRoutingModule,
   ]
 })
 export class ViewsModule { }
