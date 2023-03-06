@@ -1,13 +1,5 @@
-.container {
-    height: 100%;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .login {
-    margin: 0 auto;
+    margin: 2.4rem auto;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,8 +7,8 @@
     background-color: rgba(127, 255, 212, 0.53);
     border-radius: 2px;
     padding: 1rem;
-    width: 690px;
-    height: 300px;
+    width: 60%;
+    height: 80%;
 
     .loginLeft {
         flex-grow: 1;
@@ -79,29 +71,20 @@ input:focus {
 }
 
 @media screen and (max-width: 800px) {
-    .navbar {
-        height: 6vh;
-        justify-content: center;
-
-        .logo {
-            img {
-                width: 4rem;
-            }
-        }
-
-        ul {
-            display: none;
-        }
-    }
 
     .login {
+        margin: 1rem auto;
         display: block;
         flex-direction: column;
-        width: 400px;
-        height: 500px;
+        width: 350px;
+        height: auto;
 
         .loginLeft {
             text-align: center;
+
+            img {
+                width: 60%;
+            }
         }
     }
 }

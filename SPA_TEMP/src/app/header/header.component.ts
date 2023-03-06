@@ -15,9 +15,12 @@ export class HeaderComponent implements OnInit {
   faChevronUp = faChevronUp;
   faBars = faBars;
   faClose = faClose;
+  isOpenNav: boolean = false;
   constructor() { }
 
   ngOnInit(): void {
   }
-
+  closeNav() {
+    this.isOpenNav = false;
+  }
 }

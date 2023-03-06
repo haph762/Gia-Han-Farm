@@ -10,6 +10,7 @@ import { ProductsTabComponent } from './products-tab/products-tab.component';
 import { CustomCenterComponent } from './custom-center/custom-center.component';
 import { NewBlogComponent } from './new-blog/new-blog.component';
 import { TopBrandsComponent } from './top-brands/top-brands.component';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { TopBrandsComponent } from './top-brands/top-brands.component';
   imports: [
     CommonModule,
     IndexRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    CarouselModule.forRoot()
   ]
 })
 export class IndexModule { }

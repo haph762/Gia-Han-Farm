@@ -11,6 +11,8 @@
     position: fixed;
 
     .logo {
+        width: 100px;
+
         img {
             width: 100%;
             height: auto;
@@ -163,6 +165,7 @@ i {
         right: 0;
         top: 5px;
         color: white;
+        cursor: pointer;
     }
 }
 
@@ -222,6 +225,9 @@ i {
     border-radius: 15px;
     border: 1px green solid;
     background-color: white;
+    p {
+        padding: 0 1rem;
+    }
 }
 
 .cart-detail-count {
@@ -237,6 +243,7 @@ i {
     right: 0;
     cursor: default;
     font-weight: 800;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
 
 .cart:hover>.cart-detail::before {
@@ -256,7 +263,7 @@ i {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1.5rem 0;
+    padding: 1rem 0;
 }
 
 //responsive
@@ -264,7 +271,7 @@ i {
     .navbar {
         .logo {
             img {
-                width: 80%;
+                width: 90%;
             }
         }
     }
@@ -347,7 +354,7 @@ i {
     .navbar {
         .logo {
             img {
-                width: 60%;
+                width: 69%;
                 height: auto;
                 cursor: pointer;
             }
@@ -362,6 +369,12 @@ i {
         fa-icon {
             font-size: 15px;
             padding: 10px;
+        }
+    }
+
+    .search-detail-from {
+        fa-icon {
+            top: 10px;
         }
     }
 }

@@ -73,6 +73,11 @@
         }
 
         .site-footer-from {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: center !important;
+            align-items: center !important;
+
             input[type="email"] {
                 font-size: 13px !important;
                 height: 30px !important;
@@ -80,9 +85,8 @@
             }
 
             button {
-                padding: 0px !important;
-                height: 30px !important;
-                right: 0rem !important;
+                position: relative !important;
+                font-size: 13px !important;
             }
         }
     }

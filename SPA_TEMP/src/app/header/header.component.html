@@ -3,27 +3,27 @@
         <label for="iconMenu">
             <fa-icon [icon]="faBars"></fa-icon>
         </label>
-        <input type="checkbox" name="iconMenu" id="iconMenu">
-        <div class="logo"><img src="../assets/logo.png" routerLink="" alt=""></div>
-        <ul class="menu menu-responsive">
+        <input type="checkbox" name="iconMenu" [(ngModel)]="isOpenNav" id="iconMenu">
+        <div class="logo"><img src="../assets/logo.png" routerLink="/" alt=""></div>
+        <ul class="menu menu-responsive" (click)="closeNav()">
             <label for="iconMenu" class="faClose">
                 <fa-icon [icon]="faClose"></fa-icon>
             </label>
-            <li><a href="http://localhost:4200/">Trang Chủ</a></li>
-            <li><a href="http://localhost:4200/">Giới Thiệu</a></li>
-            <li class="product"><a href="http://localhost:4200/">Sản Phẩm
+            <li><a routerLink="">Trang Chủ</a></li>
+            <li><a routerLink="">Giới Thiệu</a></li>
+            <li class="product"><a routerLink="">Sản Phẩm
                     <fa-icon [icon]="faChevronDown"></fa-icon>
                     <fa-icon [icon]="faChevronUp"></fa-icon>
                 </a>
                 <ul class="product-list">
-                    <li><a href="http://localhost:4200/">Rau Củ</a></li>
-                    <li><a href="http://localhost:4200/">Hải Sản</a></li>
-                    <li><a href="http://localhost:4200/">Hoa Quả</a></li>
-                    <li><a href="http://localhost:4200/">Thưc phẩm tươi sống</a></li>
+                    <li><a routerLink="">Rau Củ</a></li>
+                    <li><a routerLink="">Hải Sản</a></li>
+                    <li><a routerLink="">Hoa Quả</a></li>
+                    <li><a routerLink="">Thưc phẩm tươi sống</a></li>
                 </ul>
             </li>
-            <li><a href="http://localhost:4200/">Tin tức</a></li>
-            <li><a href="http://localhost:4200/">Liên Hệ</a></li>
+            <li><a routerLink="">Tin tức</a></li>
+            <li><a routerLink="">Liên Hệ</a></li>
         </ul>
         <div class="admin">
             <div class="search">
@@ -46,8 +46,6 @@
                 <fa-icon [icon]="faBasketShopping"></fa-icon>
                 <div class="cart-detail-count">0</div>
                 <div class="cart-detail">
-                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
-                    <p>Không có sản phẩm nào trong giỏ hàng.</p>
                     <p>Không có sản phẩm nào trong giỏ hàng.</p>
                 </div>
             </div>
