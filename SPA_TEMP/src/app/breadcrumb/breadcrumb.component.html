@@ -4,5 +4,7 @@
         <a routerLink="">Trang chủ</a>
         <span>/</span>
         <a routerLink="/about-me">{{title}}</a>
+        <span *ngIf="subTitle !== ''">/</span>
+        <a routerLink="/about-me">{{subTitle}}</a>
     </div>
 </div>

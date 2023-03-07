@@ -16,7 +16,7 @@
             </div>
         </div>
         <div class="row" *ngIf="!isIndex">
-            <div class="tab-product-col">
+            <div class="tab-product-col" *ngIf="!isRelated">
                 <h2>Tất cả sản phẩm</h2>
                 <div class="filter">
                     <p>Sắp xếp theo:</p>
@@ -38,16 +38,19 @@
                     </div>
                 </div>
             </div>
+            <div class="col l-8 m-8 c-10 l-o-2 m-o-2 c-o-1 h2-title" *ngIf="isRelated">
+                <h2>Sản phẩm liên quan</h2>
+            </div>
         </div>
         <div class="row tab-detail">
             <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
+                <a class="tab-description" (click)="detail(1)">
                     <div class="tab-description-body">
                         <img src="../../../assets/img-index/tab1.png" alt="">
                     </div>
                     <div class="tab-description-footer">
                         <p>Chanh tươi</p>
-                        <span>30.000</span>
+                        <span>301.000</span>
                         <span>45.000</span>
                     </div>
                     <div class="tab-description-cart">
@@ -57,14 +60,14 @@
                 </a>
             </div>
             <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
+                <a class="tab-description" (click)="detail(1)">
                     <div class="tab-description-body">
                         <img src="../../../assets/img-index/tab2.png" alt="">
                     </div>
                     <div class="tab-description-footer">
-                        <p>Quả óc chó</p>
-                        <span>430.000</span>
-                        <span>645.000</span>
+                        <p>Chanh tươi</p>
+                        <span>301.000</span>
+                        <span>45.000</span>
                     </div>
                     <div class="tab-description-cart">
                         <fa-icon [icon]="faSearch"></fa-icon>
@@ -73,13 +76,14 @@
                 </a>
             </div>
             <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
+                <a class="tab-description" (click)="detail(1)">
                     <div class="tab-description-body">
-                        <img src="../../../assets/img-index/tab2.png" alt="">
+                        <img src="../../../assets/img-index/tab4.png" alt="">
                     </div>
                     <div class="tab-description-footer">
-                        <p>Hạt điều khô</p>
-                        <span>230.000</span>
+                        <p>Chanh tươi</p>
+                        <span>301.000</span>
+                        <span>45.000</span>
                     </div>
                     <div class="tab-description-cart">
                         <fa-icon [icon]="faSearch"></fa-icon>
@@ -88,14 +92,30 @@
                 </a>
             </div>
             <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
+                <a class="tab-description" (click)="detail(1)">
+                    <div class="tab-description-body">
+                        <img src="../../../assets/img-index/tab4.png" alt="">
+                    </div>
+                    <div class="tab-description-footer">
+                        <p>Chanh tươi</p>
+                        <span>301.000</span>
+                        <span>45.000</span>
+                    </div>
+                    <div class="tab-description-cart">
+                        <fa-icon [icon]="faSearch"></fa-icon>
+                        <fa-icon [icon]="faBasketShopping"></fa-icon>
+                    </div>
+                </a>
+            </div>
+            <div class="col l-2 m-4 c-5">
+                <a class="tab-description" (click)="detail(1)">
                     <div class="tab-description-body">
                         <img src="../../../assets/img-index/t.png" alt="">
                     </div>
                     <div class="tab-description-footer">
-                        <p>Hành tây đăc biệt Hành tây đăc biệt</p>
-                        <span>36.000</span>
-                        <span>49.000</span>
+                        <p>Chanh tươi</p>
+                        <span>301.000</span>
+                        <span>45.000</span>
                     </div>
                     <div class="tab-description-cart">
                         <fa-icon [icon]="faSearch"></fa-icon>
@@ -104,14 +124,14 @@
                 </a>
             </div>
             <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
+                <a class="tab-description" (click)="detail(1)">
                     <div class="tab-description-body">
-                        <img src="../../../assets/img-index/tab4.png" alt="">
+                        <img src="../../../assets/img-index/tab5.png" alt="">
                     </div>
                     <div class="tab-description-footer">
-                        <p>Hành tây đăc biệt</p>
-                        <span>36.000</span>
-                        <span>49.000</span>
+                        <p>Chanh tươi</p>
+                        <span>301.000</span>
+                        <span>45.000</span>
                     </div>
                     <div class="tab-description-cart">
                         <fa-icon [icon]="faSearch"></fa-icon>
@@ -119,22 +139,7 @@
                     </div>
                 </a>
             </div>
-            <div class="col l-2 m-4 c-5">
-                <a href="" class="tab-description">
-                    <div class="tab-description-body">
-                        <img src="../../../assets/img-index/tab4.png" alt="">
-                    </div>
-                    <div class="tab-description-footer">
-                        <p>Hành tây đăc biệt</p>
-                        <span>36.000</span>
-                        <span>49.000</span>
-                    </div>
-                    <div class="tab-description-cart">
-                        <fa-icon [icon]="faSearch"></fa-icon>
-                        <fa-icon [icon]="faBasketShopping"></fa-icon>
-                    </div>
-                </a>
-            </div>
+
         </div>
     </div>
 </div>

@@ -1,0 +1,105 @@
+.register {
+    margin: 2.4rem auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 5px 15px rgba(127, 255, 212, 0.733);
+    background-color: rgba(127, 255, 212, 0.53);
+    border-radius: 2px;
+    padding: 1rem;
+    width: 60%;
+    height: 80%;
+
+    .registerLeft {
+        flex-grow: 1;
+        padding: 0 1rem;
+
+        img {
+            padding: 2rem;
+            width: 250px;
+            border-radius: 50%;
+        }
+    }
+
+    .registerRight {
+        flex-grow: 10;
+        padding: 0 1rem;
+
+        h2 {
+            cursor: default;
+            text-align: center;
+            color: white;
+        }
+    }
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+
+    label {
+        color: white;
+    }
+}
+
+input[type=email],
+input[type=text],
+input[type=password] {
+    width: 100%;
+    padding: 12px 12px;
+    margin: 5px 0;
+    box-sizing: border-box;
+    border: none;
+    margin-bottom: 8px;
+}
+
+input:focus {
+    outline: none;
+}
+
+.btnregister {
+    margin-top: 5px;
+    width: 100%;
+    height: 2rem;
+    background-color: green;
+    border: none;
+    color: white;
+    align-self: flex-end;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+
+    .register {
+        margin: 1rem auto;
+        display: block;
+        flex-direction: column;
+        width: 550px;
+        height: auto;
+
+        .registerLeft {
+            text-align: center;
+
+            img {
+                width: 50%;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .register {
+        width: 350px;
+
+        .registerLeft {
+
+            img {
+                width: 60%;
+            }
+        }
+    }
+}

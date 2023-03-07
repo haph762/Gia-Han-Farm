@@ -5,17 +5,21 @@ import { CommonModule } from '@angular/common';
 
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductsComponent } from './products.component';
+import { ProductDetailComponent } from './product-detail/product-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [
-    ProductsComponent
+    ProductsComponent,
+    ProductDetailComponent
   ],
   imports: [
     CommonModule,
     ProductsRoutingModule,
     BreadcrumbModule,
-    IndexModule
+    IndexModule,
+    FontAwesomeModule,
   ]
 })
 export class ProductsModule { }

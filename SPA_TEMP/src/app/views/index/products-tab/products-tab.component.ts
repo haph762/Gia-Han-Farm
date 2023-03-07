@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faBasketShopping, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -12,9 +13,14 @@ export class ProductsTabComponent implements OnInit {
   faBasketShopping = faBasketShopping;
   @Input() isIndex: boolean = true;
   @Input() isBestSale: boolean = true;
-  constructor() { }
+  @Input() isRelated: boolean = false;
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  detail(id: number) {
+    return this.router.navigate([`products/detail/${id}`]);
   }
 
 }

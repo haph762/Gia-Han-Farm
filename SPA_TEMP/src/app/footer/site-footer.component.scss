@@ -51,7 +51,7 @@
 @media (max-width: 1200px) {
     .site-footer-row {
         h2 {
-            font-size: 22px;
+            font-size: 22px !important;
         }
 
         .site-footer-from {
@@ -79,14 +79,15 @@
             align-items: center !important;
 
             input[type="email"] {
-                font-size: 13px !important;
-                height: 30px !important;
-                padding-right: 120px !important;
+                font-size: 15px !important;
+                height: 35px !important;
+                padding-right: 10px !important;
             }
 
             button {
                 position: relative !important;
-                font-size: 13px !important;
+                height: 35px !important;
+                padding: 0 !important;
             }
         }
     }
