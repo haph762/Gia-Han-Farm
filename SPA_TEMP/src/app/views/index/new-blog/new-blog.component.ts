@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { faCalendar } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -10,9 +11,12 @@ export class NewBlogComponent implements OnInit {
 
   faCalendar = faCalendar;
   @Input() isIndex: boolean = true;
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+  detail(id: number) {
+    return this.router.navigate([`new-blog/detail/${id}`]);
   }
 
 }

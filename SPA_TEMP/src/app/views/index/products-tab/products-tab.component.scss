@@ -21,6 +21,10 @@
 
         .filter-item {
             margin-left: 1rem;
+
+            input:checked {
+                accent-color: green;
+            }
         }
     }
 }

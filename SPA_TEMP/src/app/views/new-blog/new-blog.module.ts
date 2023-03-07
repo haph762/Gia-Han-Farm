@@ -5,17 +5,21 @@ import { CommonModule } from '@angular/common';
 import { NewBlogRoutingModule } from './new-blog-routing.module';
 import { NewBlogComponent } from './new-blog.component';
 import { BreadcrumbModule } from 'src/app/breadcrumb/breadcrumb.module';
+import { NewBlogDetailComponent } from './new-blog-detail/new-blog-detail.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 @NgModule({
   declarations: [
-    NewBlogComponent
+    NewBlogComponent,
+    NewBlogDetailComponent
   ],
   imports: [
     CommonModule,
     NewBlogRoutingModule,
     BreadcrumbModule,
-    IndexModule
+    IndexModule,
+    FontAwesomeModule,
   ]
 })
 export class NewBlogModule { }
