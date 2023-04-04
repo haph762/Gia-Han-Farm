@@ -32,7 +32,6 @@ export class AuthService {
         if (user) {
           localStorage.setItem('token', user.token);
           localStorage.setItem('user', JSON.stringify(user.user));
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
         }
       }),
     );
@@ -41,7 +40,5 @@ export class AuthService {
   logout(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-
-    this.decodedToken = null;
   }
 }

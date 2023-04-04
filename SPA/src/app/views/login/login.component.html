@@ -13,17 +13,19 @@
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-user"></i></span>
                     </div>
-                    <input type="text" class="form-control" placeholder="Username" name="username" [(ngModel)]="user.userName" autocomplete="username" required>
+                    <input type="text" class="form-control" placeholder="Username" name="username"
+                      [(ngModel)]="user.userName" autocomplete="username" required>
                   </div>
                   <div class="input-group mb-4">
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="icon-lock"></i></span>
                     </div>
-                    <input type="password" class="form-control" placeholder="Password" name="password" [(ngModel)]="user.password" autocomplete="current-password" required>
+                    <input type="password" class="form-control" placeholder="Password" name="password"
+                      [(ngModel)]="user.password" autocomplete="current-password" required>
                   </div>
                   <div class="row">
                     <div class="col" style="display: flex; align-items: center; justify-content: center;">
-                      <button type="submit" class="btn btn-primary px-4">Login</button>
+                      <button type="submit" [disabled]="!form.valid" class="btn btn-primary px-4">Login</button>
                     </div>
                   </div>
                 </form>
@@ -44,4 +46,6 @@
     </div>
   </main>
 </div>
-<ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#7cc242" type = "timer" [fullScreen] = "true"><p style="color: white" > Loading... </p></ngx-spinner>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#7cc242" type="timer" [fullScreen]="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

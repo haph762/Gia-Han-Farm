@@ -24,7 +24,8 @@
     "build": "ng build --configuration production --aot --build-optimizer --common-chunk --vendor-chunk --optimization --progress",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "generate:api": "openapi-generator-cli generate -i test.yaml -g typescript-angular -o src/app/_core/_test-model/v1"
   },
   "private": true,
   "dependencies": {
@@ -45,6 +46,7 @@
     "@coreui/icons": "^2.0.0-rc.0",
     "@coreui/icons-angular": "1.0.0-alpha.3",
     "@ngneat/until-destroy": "^8.1.3",
+    "@openapitools/openapi-generator-cli": "^2.5.2",
     "bootstrap": "^4.6.0",
     "chart.js": "^2.9.4",
     "core-js": "^3.9.1",

@@ -26,7 +26,7 @@ namespace API.Controllers
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> CreateNews([FromForm] News_Dto model)
+        public async Task<IActionResult> CreateNews([FromBody] News_Dto model)
         {
             if (model.File != null && model.News_ID == null)
                 model.Image = await _fileService.UploadFiles(model.File, model.News_ID + "_", @"\uploaded\images\news");
@@ -64,7 +64,7 @@ namespace API.Controllers
         }
 
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateNews([FromForm] News_Dto model)
+        public async Task<IActionResult> UpdateNews([FromBody] News_Dto model)
         {
             if (model.File != null)
             {

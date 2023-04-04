@@ -1,0 +1,625 @@
+---
+openapi: 3.0.1
+info:
+  title: GHF_API
+  version: v1
+paths:
+  "/api/Auth/login":
+    post:
+      tags:
+        - Auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/UserForLoginParam"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/UserForLoginParam"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/UserForLoginParam"
+      responses:
+        "200":
+          description: Success
+  "/api/News/create":
+    post:
+      tags:
+        - News
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+      responses:
+        "200":
+          description: Success
+  "/api/News/getall":
+    get:
+      tags:
+        - News
+      parameters:
+        - name: text
+          in: query
+          schema:
+            type: string
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+  "/api/News/getnewsbyid":
+    get:
+      tags:
+        - News
+      parameters:
+        - name: news_id
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+  "/api/News/delete":
+    delete:
+      tags:
+        - News
+      parameters:
+        - name: News_ID
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: Title
+          in: query
+          schema:
+            type: string
+        - name: Short_Description
+          in: query
+          schema:
+            type: string
+        - name: Contents
+          in: query
+          schema:
+            type: string
+        - name: Update_By
+          in: query
+          schema:
+            type: string
+        - name: Update_Time
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: Image
+          in: query
+          schema:
+            type: string
+        - name: UrlImages
+          in: query
+          schema:
+            type: array
+            items:
+              type: string
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                File:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+            encoding:
+              File:
+                style: form
+      responses:
+        "200":
+          description: Success
+  "/api/News/update":
+    put:
+      tags:
+        - News
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/News_Dto"
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/create":
+    post:
+      tags:
+        - Product_Service_Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/getall":
+    get:
+      tags:
+        - Product_Service_Category
+      parameters:
+        - name: text
+          in: query
+          schema:
+            type: string
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/getid":
+    get:
+      tags:
+        - Product_Service_Category
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/delete":
+    delete:
+      tags:
+        - Product_Service_Category
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/update":
+    put:
+      tags:
+        - Product_Service_Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          text/json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          application/*+json:
+            schema:
+              "$ref": "#/components/schemas/Product_Service_Category_Dto"
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/excelaspose":
+    get:
+      tags:
+        - Product_Service_Category
+      parameters:
+        - name: text
+          in: query
+          schema:
+            type: string
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: checkExport
+          in: query
+          schema:
+            type: integer
+            format: int32
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/uploadexcel":
+    post:
+      tags:
+        - Product_Service_Category
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+            encoding:
+              file:
+                style: form
+      responses:
+        "200":
+          description: Success
+  "/api/Product_Service_Category/deletemultiple":
+    post:
+      tags:
+        - Product_Service_Category
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          text/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Product_Service_Category_Dto"
+          application/*+json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Product_Service_Category_Dto"
+      responses:
+        "200":
+          description: Success
+  "/api/Users/create":
+    post:
+      tags:
+        - Users
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                User_Account:
+                  type: string
+                Password:
+                  type: string
+                User_Name:
+                  type: string
+                Email:
+                  type: string
+                Phone_Number:
+                  type: string
+                Valid_From:
+                  type: string
+                  format: date-time
+                Valid_To:
+                  type: string
+                  format: date-time
+                Last_Login:
+                  type: string
+                  format: date-time
+                Update_By:
+                  type: string
+                Update_Time:
+                  type: string
+                  format: date-time
+                Image:
+                  type: string
+                File:
+                  type: string
+                  format: binary
+            encoding:
+              User_Account:
+                style: form
+              Password:
+                style: form
+              User_Name:
+                style: form
+              Email:
+                style: form
+              Phone_Number:
+                style: form
+              Valid_From:
+                style: form
+              Valid_To:
+                style: form
+              Last_Login:
+                style: form
+              Update_By:
+                style: form
+              Update_Time:
+                style: form
+              Image:
+                style: form
+              File:
+                style: form
+      responses:
+        "200":
+          description: Success
+  "/api/Users/getall":
+    get:
+      tags:
+        - Users
+      parameters:
+        - name: PageNumber
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: PageSize
+          in: query
+          schema:
+            type: integer
+            format: int32
+        - name: text
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Users/getuser":
+    get:
+      tags:
+        - Users
+      parameters:
+        - name: user_account
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Users/update":
+    put:
+      tags:
+        - Users
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                User_Account:
+                  type: string
+                Password:
+                  type: string
+                User_Name:
+                  type: string
+                Email:
+                  type: string
+                Phone_Number:
+                  type: string
+                Valid_From:
+                  type: string
+                  format: date-time
+                Valid_To:
+                  type: string
+                  format: date-time
+                Last_Login:
+                  type: string
+                  format: date-time
+                Update_By:
+                  type: string
+                Update_Time:
+                  type: string
+                  format: date-time
+                Image:
+                  type: string
+                File:
+                  type: string
+                  format: binary
+            encoding:
+              User_Account:
+                style: form
+              Password:
+                style: form
+              User_Name:
+                style: form
+              Email:
+                style: form
+              Phone_Number:
+                style: form
+              Valid_From:
+                style: form
+              Valid_To:
+                style: form
+              Last_Login:
+                style: form
+              Update_By:
+                style: form
+              Update_Time:
+                style: form
+              Image:
+                style: form
+              File:
+                style: form
+      responses:
+        "200":
+          description: Success
+  "/api/Users/delete":
+    delete:
+      tags:
+        - Users
+      parameters:
+        - name: user_account
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Users/getroles":
+    get:
+      tags:
+        - Users
+      parameters:
+        - name: user_account
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Success
+  "/api/Users/updateroles":
+    put:
+      tags:
+        - Users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Role_User_Dto"
+          text/json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Role_User_Dto"
+          application/*+json:
+            schema:
+              type: array
+              items:
+                "$ref": "#/components/schemas/Role_User_Dto"
+      responses:
+        "200":
+          description: Success
+components:
+  schemas:
+    News_Dto:
+      type: object
+      properties:
+        news_ID:
+          type: integer
+          format: int32
+          nullable: true
+        title:
+          type: string
+          nullable: true
+        short_Description:
+          type: string
+          nullable: true
+        contents:
+          type: string
+          nullable: true
+        update_By:
+          type: string
+          nullable: true
+        update_Time:
+          type: string
+          format: date-time
+          nullable: true
+        image:
+          type: string
+          nullable: true
+        urlImages:
+          type: array
+          items:
+            type: string
+          nullable: true
+        file:
+          type: array
+          items:
+            type: string
+            format: binary
+          nullable: true
+      additionalProperties: false
+    Product_Service_Category_Dto:
+      type: object
+      properties:
+        product_Service_Cate_ID:
+          type: string
+          nullable: true
+        product_Service_Cate_Name:
+          type: string
+          nullable: true
+        status:
+          type: boolean
+          nullable: true
+        position:
+          type: integer
+          format: int32
+        update_By:
+          type: string
+          nullable: true
+        update_Time:
+          type: string
+          format: date-time
+          nullable: true
+        checked:
+          type: boolean
+      additionalProperties: false
+    Role_User_Dto:
+      type: object
+      properties:
+        user_Account:
+          type: string
+          nullable: true
+        role_Unique:
+          type: string
+          nullable: true
+        role_Name:
+          type: string
+          nullable: true
+        role_Type:
+          type: string
+          nullable: true
+        role_Sequence:
+          type: number
+          format: double
+        status:
+          type: boolean
+      additionalProperties: false
+    UserForLoginParam:
+      type: object
+      properties:
+        account:
+          type: string
+          nullable: true
+        password:
+          type: string
+          nullable: true
+      additionalProperties: false
+  securitySchemes:
+    Bearer:
+      type: apiKey
+      description: Please insert JWT with Bearer into field
+      name: Authorization
+      in: header
+security:
+  - Bearer: []
